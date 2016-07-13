@@ -27,5 +27,5 @@ it('converts mile seconds to kilometre seconds', function() {
 it('only recognises correct pace format', () => {
   expect(isHoursMinsSecs('00:00:00')).toBe(true);
   expect(isHoursMinsSecs('00:00:0')).toBe(false);
-  expect(isHoursMinsSecs('00:00:99')).toBe(true);
+  expect(isHoursMinsSecs('00:00:99')).toBe(true); // ? perhaps this should be wrong, and we should check for < 60 || < 24
 });
