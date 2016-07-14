@@ -12,6 +12,13 @@ var isNumberKey = function(keycode){
 }
 
 function isHoursMinsSecs(val) {
+  const split = val.split(':');
+  const hours = split[0];
+  const mins = split[1];
+  const secs = split[2];
+  if (hours > 23 || mins > 59 || secs > 59) {
+    return false;
+  }
   return !!val.match(/^[0-9]{2}(:[0-9]{2}){2}/);
 }
 
@@ -45,7 +52,11 @@ function mileSecondsToKSeconds(mileSeconds) {
 }
 
 function processForm(focussedInputJq) {
-   var paceSecondsPerK = mileSecondsToKSeconds(paceToSeconds(focussedInputJq.val()));
+   if (['1k', '5k'].includes(focussedInputJq.attr('id'))) {
+     var paceSecondsPerK = paceToSeconds(focussedInputJq.val());
+   } else {
+     var paceSecondsPerK = mileSecondsToKSeconds(paceToSeconds(focussedInputJq.val()));
+   }
    $('input').not(focussedInputJq).each(function(){
       var k = $(this).data('k');
       $(this).val(secondsToPace(paceSecondsPerK * k));
@@ -60,13 +71,17 @@ function processForm(focussedInputJq) {
    // $('#marathon').val(secondsToPace(paceSecondsPerK * marathonDistanceInK));
 }
 
+function initialise(){
+  $('input').each(function(){
+      $(this).keyup(function(ev) {
+         if (isHoursMinsSecs($(this).val()) && isNumberKey(ev.which)) {
+            processForm($(this));
+         }
+      });
+  })
+  $('#1m').trigger('keyup');
+}
+
 $(function() {
-   $('input').each(function(){
-       $(this).keyup(function(ev) {
-          if (isHoursMinsSecs($(this).val()) && isNumberKey(ev.which)) {
-             processForm($(this));
-          }
-       });
-   })
-   $('#1m').trigger('keyup');
+  initialise();
 });
