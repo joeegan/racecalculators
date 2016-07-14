@@ -14,8 +14,20 @@ describe('Integration tests', function() {
     expect($('input#10k').val()).to.equal('00:47:26');
     expect($('input#marathon').val()).to.equal('03:20:08');
   });
-  it('adjusting 1 k updates the other inputs', function() {
+
+  it('adjusting 1k updates the other inputs', function() {
     $('input#1k').val('00:05:22').keyup();
     expect($('input#1m').val()).to.equal('00:08:38');
   });
+
+  it('adjusting 5k updates the other inputs', function() {
+    $('input#5k').val('00:20:40').keyup();
+    expect($('input#1m').val()).to.equal('00:06:39');
+  });
+
+  it('adjusting marathon updates the other inputs', function() {
+    $('input#marathon').val('02:58:00').keyup();
+    expect($('input#1m').val()).to.equal('00:06:47');
+  });
+
 });

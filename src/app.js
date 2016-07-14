@@ -19,7 +19,7 @@ function isHoursMinsSecs(val) {
   if (hours > 23 || mins > 59 || secs > 59) {
     return false;
   }
-  return !!val.match(/^[0-9]{2}(:[0-9]{2}){2}/);
+  return !!val.match(/^[0-9]{2}(:[0-9]{2}){2}$/);
 }
 
 function pad(num, size) {
@@ -47,28 +47,12 @@ function secondsToPace(secs) {
    return `${hours}:${mins}:${secs}`;
 }
 
-function mileSecondsToKSeconds(mileSeconds) {
-   return mileSeconds / mileDistanceInMeters * 1000;
-}
-
 function processForm(focussedInputJq) {
-   if (['1k', '5k'].includes(focussedInputJq.attr('id'))) {
-     var paceSecondsPerK = paceToSeconds(focussedInputJq.val());
-   } else {
-     var paceSecondsPerK = mileSecondsToKSeconds(paceToSeconds(focussedInputJq.val()));
-   }
+   var paceSecondsPerK = paceToSeconds(focussedInputJq.val()) / focussedInputJq.data('k');
    $('input').not(focussedInputJq).each(function(){
       var k = $(this).data('k');
       $(this).val(secondsToPace(paceSecondsPerK * k));
    });
-   // $('#1k').val(secondsToPace(paceSecondsPerK * 1));
-   // $('#1m').val(secondsToPace(paceSecondsPerK * mileDistanceInK));
-   // $('#5k').val(secondsToPace(paceSecondsPerK * 5));
-   // $('#10k').val(secondsToPace(paceSecondsPerK * 10));
-   // $('#10m').val(secondsToPace(paceSecondsPerK * tenMileDistanceInK));
-   // $('#half').val(secondsToPace(paceSecondsPerK * halfMarathonDistanceInK));
-   // $('#20m').val(secondsToPace(paceSecondsPerK * twentyMileDistanceInK));
-   // $('#marathon').val(secondsToPace(paceSecondsPerK * marathonDistanceInK));
 }
 
 function initialise(){
@@ -82,6 +66,4 @@ function initialise(){
   $('#1m').trigger('keyup');
 }
 
-$(function() {
-  initialise();
-});
+$(document).ready(initialise);
