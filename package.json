@@ -4,7 +4,7 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "build": "babel src -d lib"
+    "build": "babel src/app.js -d lib/ && browserify lib/src/app.js > lib/bundle.js"
   },
   "repository": {
     "type": "git",
