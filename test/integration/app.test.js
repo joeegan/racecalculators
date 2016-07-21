@@ -1,11 +1,11 @@
 describe('Integration tests', function() {
 
   before(function(done) {
-    $.get('base/src/partial.html').then(((body) => {
+    $.get('base/src/partial.html').then((body) => {
       $('div#mocha').append(body);
       initialise();
       done();
-    }));
+    });
   });
 
   it('adjusting 1 mile updates the other inputs', function() {
