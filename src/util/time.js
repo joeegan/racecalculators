@@ -1,3 +1,4 @@
+/* eslint no-return-assign: "error" */
 import { padLeft } from './string';
 
 export function isHoursMinsSecs(pace) {
@@ -7,15 +8,15 @@ export function isHoursMinsSecs(pace) {
 }
 
 export function paceToSeconds(pace) {
-   return pace.split(':')
-       .map((str, i) => +str * Math.pow(60, 2-i))
+  return pace.split(':')
+       .map((str, i) => +str * Math.pow(60, 2 - i))
        .reduce((num, prev) => num += prev);
 }
 
 export function secondsToPace(secs) {
-   let mins = Math.floor(secs / 60);
-   const hours = Math.floor(mins / 60);
-   mins = mins % 60;
-   secs = Math.round(secs % 60);
-   return [hours, mins, secs].map((t) => padLeft(t, 2)).join(':');
+  const mins = Math.floor(secs / 60);
+  const hours = Math.floor(mins / 60);
+  const minutes = mins % 60;
+  const seconds = Math.round(secs % 60);
+  return [hours, minutes, seconds].map((t) => padLeft(t, 2)).join(':');
 }

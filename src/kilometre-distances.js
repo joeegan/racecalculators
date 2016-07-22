@@ -7,4 +7,4 @@ export default {
   halfMarathon: 21.097494,
   twentyMiles: 32.1869,
   marathon: 42.194988,
-}
+};

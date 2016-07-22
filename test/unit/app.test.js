@@ -1,13 +1,18 @@
-var expect = chai.expect;
+import { expect } from 'chai';
+import { describe, it } from 'mocha';
+import {
+  paceToSeconds,
+  secondsToPace,
+  isHoursMinsSecs,
+} from '../../src/util/time';
 
 function convertsPaceAndSeconds(pace, seconds) {
   expect(paceToSeconds(pace)).to.equal(seconds);
   expect(secondsToPace(seconds)).to.equal(pace);
 }
 
-describe('Unit tests', function() {
-
-  it('can convert pace to seconds, and vice versa', function() {
+describe('Unit tests', () => {
+  it('can convert pace to seconds, and vice versa', () => {
     convertsPaceAndSeconds('00:00:01', 1);
     convertsPaceAndSeconds('00:00:59', 59);
     convertsPaceAndSeconds('00:01:10', 70);
@@ -34,5 +39,4 @@ describe('Unit tests', function() {
     expect(isHoursMinsSecs('24:00:00')).to.equal(false);
     expect(isHoursMinsSecs('23:59:59')).to.equal(true);
   });
-
 });

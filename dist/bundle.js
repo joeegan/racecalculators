@@ -1,15 +1,15 @@
 'use strict';
 
 var isNumberKey = function isNumberKey(keycode) {
-  return !keycode || keycode > 47 && keycode < 58 || keycode == 186;
+  return !keycode || keycode > 47 && keycode < 58 || keycode === 186;
 };
 
 var padLeft = function padLeft(num, size) {
-   var s = num + '';
-   while (s.length < size) {
-      s = '0' + s;
-   }
-   return s;
+  var s = "" + num;
+  while (s.length < size) {
+    s = "0" + s;
+  }
+  return s;
 };
 
 var slicedToArray = function () {
@@ -51,40 +51,40 @@ var slicedToArray = function () {
 }();
 
 function isHoursMinsSecs(pace) {
-   var _pace$split = pace.split(':');
+  var _pace$split = pace.split(':');
 
-   var _pace$split2 = slicedToArray(_pace$split, 3);
+  var _pace$split2 = slicedToArray(_pace$split, 3);
 
-   var hours = _pace$split2[0];
-   var mins = _pace$split2[1];
-   var secs = _pace$split2[2];
+  var hours = _pace$split2[0];
+  var mins = _pace$split2[1];
+  var secs = _pace$split2[2];
 
-   return hours < 24 && mins < 59 && secs < 59 && !!pace.match(/^[0-9]{2}(:[0-9]{2}){2}$/);
+  return hours < 24 && mins < 59 && secs < 59 && !!pace.match(/^[0-9]{2}(:[0-9]{2}){2}$/);
 }
 
 function paceToSeconds(pace) {
-   return pace.split(':').map(function (str, i) {
-      return +str * Math.pow(60, 2 - i);
-   }).reduce(function (num, prev) {
-      return num += prev;
-   });
+  return pace.split(':').map(function (str, i) {
+    return +str * Math.pow(60, 2 - i);
+  }).reduce(function (num, prev) {
+    return num += prev;
+  });
 }
 
 function secondsToPace(secs) {
-   var mins = Math.floor(secs / 60);
-   var hours = Math.floor(mins / 60);
-   mins = mins % 60;
-   secs = Math.round(secs % 60);
-   return [hours, mins, secs].map(function (t) {
-      return padLeft(t, 2);
-   }).join(':');
+  var mins = Math.floor(secs / 60);
+  var hours = Math.floor(mins / 60);
+  var minutes = mins % 60;
+  var seconds = Math.round(secs % 60);
+  return [hours, minutes, seconds].map(function (t) {
+    return padLeft(t, 2);
+  }).join(':');
 }
 
 function processForm(inputJq) {
   var paceSecondsPerK = paceToSeconds(inputJq.val()) / inputJq.data('k');
-  $('input').not(inputJq).each(function () {
-    var k = $(this).data('k');
-    $(this).val(secondsToPace(paceSecondsPerK * k));
+  $('input').not(inputJq).each(function (i, input) {
+    var k = $(input).data('k');
+    $(input).val(secondsToPace(paceSecondsPerK * k));
   });
 }
 

@@ -1,29 +1,24 @@
-import {
-  rightKeyCode,
-  leftKeyCode,
-  isNumberKey
-} from './keyboard';
-
+import { isNumberKey } from './keyboard';
 import {
   isHoursMinsSecs,
   paceToSeconds,
-  secondsToPace
+  secondsToPace,
 } from './util/time';
 
 function processForm(inputJq) {
-   var paceSecondsPerK = paceToSeconds(inputJq.val()) / inputJq.data('k');
-   $('input').not(inputJq).each(function(){
-      var k = $(this).data('k');
-      $(this).val(secondsToPace(paceSecondsPerK * k));
-   });
+  const paceSecondsPerK = paceToSeconds(inputJq.val()) / inputJq.data('k');
+  $('input').not(inputJq).each((i, input) => {
+    const k = $(input).data('k');
+    $(input).val(secondsToPace(paceSecondsPerK * k));
+  });
 }
 
-function initialise(){
+function initialise() {
   $('input').keyup((ev) => {
-     if (isHoursMinsSecs($(ev.target).val()) && isNumberKey(ev.which)) {
-        processForm($(ev.target));
-     }
-    });
+    if (isHoursMinsSecs($(ev.target).val()) && isNumberKey(ev.which)) {
+      processForm($(ev.target));
+    }
+  });
   $('#1m').trigger('keyup');
 }
 
