@@ -3,7 +3,7 @@ import { padLeft } from './string';
 
 export function isHoursMinsSecs(pace) {
   const [hours, mins, secs] = pace.split(':');
-  return (hours < 24 && mins < 59 && secs < 59) &&
+  return (hours < 24 && mins < 60 && secs < 60) &&
     !!pace.match(/^[0-9]{2}(:[0-9]{2}){2}$/);
 }
 
