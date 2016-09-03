@@ -7,6 +7,8 @@ module.exports = {
   "rules": {
     // "no-param-reassign": ["error", { "props": false }],
     "no-undef": "error",
+    "no-console": "off",
+    "no-shadow": "off",
   },
   "globals": {
     "$": true,
