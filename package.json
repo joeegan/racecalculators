@@ -4,7 +4,7 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "run": "webpack-dev-server",
+    "start": "webpack-dev-server",
     "build": "webpack src/app.js dist/bundle.js",
     "test": "jest --coverage",
     "coverage": "cat ./coverage/lcov.info | ./node_modules/.bin/coveralls"
