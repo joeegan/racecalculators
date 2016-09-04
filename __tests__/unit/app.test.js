@@ -1,14 +1,11 @@
-import { expect } from 'chai';
-import { describe, it } from 'mocha';
-import {
-  paceToSeconds,
-  secondsToPace,
-  isHoursMinsSecs,
-} from '../../src/util/time';
+const time = require('../../src/util/time');
+const paceToSeconds = time.paceToSeconds;
+const secondsToPace = time.secondsToPace;
+const isHoursMinsSecs = time.isHoursMinsSecs;
 
 function convertsPaceAndSeconds(pace, seconds) {
-  expect(paceToSeconds(pace)).to.equal(seconds);
-  expect(secondsToPace(seconds)).to.equal(pace);
+  expect(paceToSeconds(pace)).toBe(seconds);
+  expect(secondsToPace(seconds)).toBe(pace);
 }
 
 describe('Unit tests', () => {
@@ -29,14 +26,14 @@ describe('Unit tests', () => {
   });
 
   it('only recognises correct pace format', () => {
-    expect(isHoursMinsSecs('00:00:00')).to.equal(true);
-    expect(isHoursMinsSecs('foo')).to.equal(false);
-    expect(isHoursMinsSecs('00:00:0')).to.equal(false);
-    expect(isHoursMinsSecs('0:00:00')).to.equal(false);
-    expect(isHoursMinsSecs('00:0:00')).to.equal(false);
-    expect(isHoursMinsSecs('00:00:60')).to.equal(false);
-    expect(isHoursMinsSecs('00:60:00')).to.equal(false);
-    expect(isHoursMinsSecs('24:00:00')).to.equal(false);
-    expect(isHoursMinsSecs('23:59:59')).to.equal(true);
+    expect(isHoursMinsSecs('00:00:00')).toBe(true);
+    expect(isHoursMinsSecs('foo')).toBe(false);
+    expect(isHoursMinsSecs('00:00:0')).toBe(false);
+    expect(isHoursMinsSecs('0:00:00')).toBe(false);
+    expect(isHoursMinsSecs('00:0:00')).toBe(false);
+    expect(isHoursMinsSecs('00:00:60')).toBe(false);
+    expect(isHoursMinsSecs('00:60:00')).toBe(false);
+    expect(isHoursMinsSecs('24:00:00')).toBe(false);
+    expect(isHoursMinsSecs('23:59:59')).toBe(true);
   });
 });

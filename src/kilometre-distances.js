@@ -1,4 +1,4 @@
-export default {
+module.exports = {
   k: 1,
   mile: 1.609344,
   fiveK: 5,

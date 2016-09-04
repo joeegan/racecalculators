@@ -1,4 +1,4 @@
-<div class='wrap'>
+module.exports = `<div class='wrap'>
    <table>
       <tr>
          <td>K</td>
@@ -33,5 +33,4 @@
          <td><input id='marathon' data-k='42.194988'></input></td>
       </tr>
    </table>
-</div>
-<script src="../lib/bundle.js"></script>
+</div>`;
