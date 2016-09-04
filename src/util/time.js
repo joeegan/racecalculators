@@ -27,4 +27,8 @@ function secondsToPace(secs) {
   return [hours, minutes, seconds].map((t) => padLeft(t, 2)).join(':');
 }
 
-module.exports = { isHoursMinsSecs, paceToSeconds, secondsToPace };
+function riegel(pace, distanceRecorded, distancePredicted) {
+  return secondsToPace(pace * (Math.pow((distancePredicted / distanceRecorded), 1.06)));
+}
+
+module.exports = { isHoursMinsSecs, paceToSeconds, secondsToPace, riegel };

@@ -2,13 +2,15 @@ const time = require('../../src/util/time');
 const paceToSeconds = time.paceToSeconds;
 const secondsToPace = time.secondsToPace;
 const isHoursMinsSecs = time.isHoursMinsSecs;
+const riegel = time.riegel;
 
 function convertsPaceAndSeconds(pace, seconds) {
   expect(paceToSeconds(pace)).toBe(seconds);
   expect(secondsToPace(seconds)).toBe(pace);
 }
 
-describe('Unit tests', () => {
+describe('Time utils', () => {
+
   it('can convert pace to seconds, and vice versa', () => {
     convertsPaceAndSeconds('00:00:01', 1);
     convertsPaceAndSeconds('00:00:59', 59);
@@ -27,6 +29,7 @@ describe('Unit tests', () => {
 
   it('only recognises correct pace format', () => {
     expect(isHoursMinsSecs('00:00:00')).toBe(true);
+    expect(isHoursMinsSecs('00:00:00')).toBe(true);
     expect(isHoursMinsSecs('foo')).toBe(false);
     expect(isHoursMinsSecs('00:00:0')).toBe(false);
     expect(isHoursMinsSecs('0:00:00')).toBe(false);
@@ -36,4 +39,12 @@ describe('Unit tests', () => {
     expect(isHoursMinsSecs('24:00:00')).toBe(false);
     expect(isHoursMinsSecs('23:59:59')).toBe(true);
   });
+
+  it('can calculate the Peter Riegel formula, predicting times for different distances', () => {
+    expect(riegel(paceToSeconds('00:01:00'), 1, 5)).toBe('00:05:30');
+    expect(riegel(paceToSeconds('00:01:00'), 1.609344, 5)).toBe('00:03:20');
+    expect(riegel(paceToSeconds('00:01:00'), 5, 5)).toBe('00:01:00');
+    expect(riegel(paceToSeconds('00:30:00'), 10, 5)).toBe('00:14:23');
+  });
+
 });
