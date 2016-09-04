@@ -1,5 +1,2 @@
 dist
-src/lib
-test/lib
-*.html
-.eslintignore
+coverage

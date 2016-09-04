@@ -1,9 +1,4 @@
-const time = require('../../src/util/time');
 const $ = require('jquery');
-const before = require('mocha').before;
-const paceToSeconds = time.paceToSeconds;
-const secondsToPace = time.secondsToPace;
-const isHoursMinsSecs = time.secondsToPace;
 const initialise = require('../../src/app').initialise;
 const html = require('../../src/partial');
 
@@ -11,6 +6,7 @@ describe('Integration tests', () => {
 
   document.body.innerHTML = html;
   initialise();
+
   it('adjusting 1 mile updates the other inputs', () => {
     $('input#1m').val('00:07:38').keyup();
     expect($('input#1k').val()).toBe('00:04:45');

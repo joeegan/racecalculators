@@ -69,7 +69,7 @@
 
 	function initialise() {
 	  $('input').keyup((ev) => {
-	    if (isHoursMinsSecs($(ev.target).val()) && isNumberKey(ev.which)) {
+	    if (isHoursMinsSecs(ev.target.value) && isNumberKey(ev.which)) {
 	      processForm($(ev.target));
 	    }
 	  });
@@ -10177,7 +10177,8 @@
 /* 3 */
 /***/ function(module, exports, __webpack_require__) {
 
-	/* eslint no-return-assign: "error" */
+	'use strict';
+
 	const padLeft = __webpack_require__(4).padLeft;
 
 	function isHoursMinsSecs(pace) {
@@ -10190,6 +10191,7 @@
 	    !!pace.match(/^[0-9]{2}(:[0-9]{2}){2}$/);
 	}
 
+	/* eslint no-return-assign: "off" */
 	function paceToSeconds(pace) {
 	  return pace.split(':')
 	       .map((str, i) => +str * Math.pow(60, 2 - i))
@@ -10210,6 +10212,8 @@
 /***/ },
 /* 4 */
 /***/ function(module, exports) {
+
+	'use strict';
 
 	module.exports = {
 	  padLeft: (num, size) => {

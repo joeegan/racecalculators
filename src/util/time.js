@@ -1,6 +1,5 @@
 'use strict';
 
-/* eslint no-return-assign: "error" */
 const padLeft = require('./string').padLeft;
 
 function isHoursMinsSecs(pace) {
@@ -13,6 +12,7 @@ function isHoursMinsSecs(pace) {
     !!pace.match(/^[0-9]{2}(:[0-9]{2}){2}$/);
 }
 
+/* eslint no-return-assign: "off" */
 function paceToSeconds(pace) {
   return pace.split(':')
        .map((str, i) => +str * Math.pow(60, 2 - i))

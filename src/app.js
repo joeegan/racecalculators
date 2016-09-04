@@ -23,7 +23,7 @@ function processForm(inputJq) {
 
 function initialise() {
   $('input').keyup((ev) => {
-    if (isHoursMinsSecs($(ev.target).val()) && isNumberKey(ev.which)) {
+    if (isHoursMinsSecs(ev.target.value) && isNumberKey(ev.which)) {
       processForm($(ev.target));
     }
   });
