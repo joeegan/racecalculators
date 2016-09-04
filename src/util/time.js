@@ -1,3 +1,5 @@
+'use strict';
+
 /* eslint no-return-assign: "error" */
 const padLeft = require('./string').padLeft;
 
