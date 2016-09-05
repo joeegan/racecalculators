@@ -5,10 +5,12 @@ const paceToSeconds = time.paceToSeconds;
 const secondsToPace = time.secondsToPace;
 const isHoursMinsSecs = time.isHoursMinsSecs;
 const riegel = time.riegel;
-
+const distances = require('./kilometre-distances');
 
 function processForm(inputJq) {
   const paceSecondsPerK = paceToSeconds(inputJq.val()) / inputJq.data('k');
+  $('input').removeClass('highlighted');
+  inputJq.addClass('highlighted');
   $('input').not(inputJq).each((i, input) => {
     const k = $(input).data('k');
     if ($('select').val() === 'PROJECTED') {
@@ -19,15 +21,23 @@ function processForm(inputJq) {
   });
 }
 
+function buildForm() {
+  $('table').html(Object.keys(distances).map((name) => {
+    return `<tr>${name}<td><td><input id=${name} data-k='${distances[name]}'></input></td></tr>`;
+  }));
+}
+
 function initialise() {
+  buildForm();
+  $('#mile').val('00:06:38');
+  processForm($('#mile'));
   $('input').keyup((ev) => {
     if (isHoursMinsSecs(ev.target.value) && isNumberKey(ev.which)) {
       processForm($(ev.target));
     }
   });
-  $('#1m').trigger('keyup');
   $('select').change(() => {
-    $('#1m').trigger('keyup');
+    processForm($('input.highlighted'));
   });
 }
 

@@ -51,10 +51,12 @@
 	const secondsToPace = time.secondsToPace;
 	const isHoursMinsSecs = time.isHoursMinsSecs;
 	const riegel = time.riegel;
-
+	const distances = __webpack_require__(5);
 
 	function processForm(inputJq) {
 	  const paceSecondsPerK = paceToSeconds(inputJq.val()) / inputJq.data('k');
+	  $('input').removeClass('highlighted');
+	  inputJq.addClass('highlighted');
 	  $('input').not(inputJq).each((i, input) => {
 	    const k = $(input).data('k');
 	    if ($('select').val() === 'PROJECTED') {
@@ -65,15 +67,23 @@
 	  });
 	}
 
+	function buildForm() {
+	  $('table').html(Object.keys(distances).map((name) => {
+	    return `<tr>${name}<td><td><input id=${name} data-k='${distances[name]}'></input></td></tr>`;
+	  }));
+	}
+
 	function initialise() {
+	  buildForm();
+	  $('#mile').val('00:06:38');
+	  processForm($('#mile'));
 	  $('input').keyup((ev) => {
 	    if (isHoursMinsSecs(ev.target.value) && isNumberKey(ev.which)) {
 	      processForm($(ev.target));
 	    }
 	  });
-	  $('#1m').trigger('keyup');
 	  $('select').change(() => {
-	    $('#1m').trigger('keyup');
+	    processForm($('input.highlighted'));
 	  });
 	}
 
@@ -10228,6 +10238,22 @@
 	    }
 	    return s;
 	  },
+	};
+
+
+/***/ },
+/* 5 */
+/***/ function(module, exports) {
+
+	module.exports = {
+	  k: 1,
+	  mile: 1.609344,
+	  fiveK: 5,
+	  tenK: 10,
+	  tenMiles: 16.0934,
+	  halfMarathon: 21.097494,
+	  twentyMiles: 32.1869,
+	  marathon: 42.194988,
 	};
 
 

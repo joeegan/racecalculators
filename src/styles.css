@@ -20,6 +20,9 @@ input {
    margin: 0 0 10px;
    text-align: center;
 }
+.highlighted {
+  border-color: green;
+}
 label {
    text-align: center;
    display: block;
