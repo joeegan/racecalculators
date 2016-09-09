@@ -7,6 +7,7 @@ import {
   isHoursMinsSecs
 } from './util/time';
 
+<<<<<<< Updated upstream
 function calculateIntialDistances(distances, initialMilePace) {
   const paceSecondsPerK = paceToSeconds(initialMilePace) / distances.mile;
   return Object.keys(distances).map((distance) => {
@@ -15,6 +16,21 @@ function calculateIntialDistances(distances, initialMilePace) {
       distance: distances[distance],
       pace: secondsToPace(paceSecondsPerK * distances[distance])
     };
+=======
+function riegel(pace, distanceRecorded, distancePredicted) {
+  return secondsToPace(pace * (Math.pow((distancePredicted / distanceRecorded), 1.06)));
+}
+
+function processForm(inputJq) {
+  const paceSecondsPerK = paceToSeconds(inputJq.val()) / inputJq.data('k');
+  $('input').not(inputJq).each((i, input) => {
+    const k = $(input).data('k');
+    if ($('select').val() === 'SAME') {
+      $(input).val(secondsToPace(paceSecondsPerK * k));
+    } else if ($('select').val() === 'PROJECTED') {
+      $(input).val(riegel(paceSecondsPerK, +inputJq.data('k'), k));
+    }
+>>>>>>> Stashed changes
   });
 }
 
@@ -73,4 +89,10 @@ const App = React.createClass({
   }
 });
 
+<<<<<<< Updated upstream
 export default App;
+=======
+$(document).ready(initialise);
+
+// The formula is T2 = T1 x (D2/D1)1.06 where T1 is the given time, D1 is the given distance, D2 is the distance to predict a time for, and T2 is the calculated time for D2.
+>>>>>>> Stashed changes
