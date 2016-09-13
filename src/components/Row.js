@@ -1,33 +1,52 @@
-import 'React' from 'react';
+import React from 'react';
+import { isHoursMinsSecs } from '../util/time';
+import { kebabCase } from 'lodash';
 
-export defult class Row extends React.Component {
+export default class Row extends React.Component {
 
-  getInitialState() {
-    return {
-      distance: this.props.data.distance,
+  constructor(props) {
+    super(props);
+    this.state = {
+      pace: props.pace,
     };
-  },
+  }
+
+  componentWillReceiveProps(nextProps) {
+    this.setState({
+      pace: nextProps.pace,
+    });
+  }
 
   handleChange(ev) {
-    if (isHoursMinsSecs(ev.target.value) && isNumberKey(ev.which)) {
-      // this.setState({value: ev.target.value});
-      this.updateParentState(ev.target.value, this.props.data.distance);
+    const pace = ev.target.value;
+    const distance = ev.target.dataset.distance;
+    this.setState({ pace });
+    if (isHoursMinsSecs(pace)) {
+      this.props.update(pace, distance);
     }
-  },
+  }
 
   render() {
-    const { name, pace } = this.props.data;
     return (
-      <tr key={name}>
-        <td>{name}</td>
+      <tr>
+        <td>{kebabCase(this.props.name)}</td>
         <td>
-          <input id={name}
-                 data-k='{distance.distance}'
-                 value={pace}
-                 onChange={this.handleChange}>
+          <input
+            value={this.state.pace}
+            data-distance={this.props.distance}
+            onChange={this.handleChange.bind(this)}
+          >
           </input></td>
       </tr>
-    )
+    );
   }
 
 }
+
+Row.propTypes = {
+  name: React.PropTypes.string,
+  distance: React.PropTypes.string,
+  pace: React.PropTypes.string,
+  update: React.PropTypes.function,
+  handleChange: React.PropTypes.function,
+};
