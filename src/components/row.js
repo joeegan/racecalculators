@@ -1,6 +1,5 @@
 import React from 'react';
 import { isHoursMinsSecs } from '../util/time';
-import { kebabCase } from 'lodash';
 
 export default class Row extends React.Component {
 
@@ -9,6 +8,7 @@ export default class Row extends React.Component {
     this.state = {
       pace: props.pace,
     };
+    this.handleChange = this.handleChange.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -29,14 +29,15 @@ export default class Row extends React.Component {
   render() {
     return (
       <tr>
-        <td>{kebabCase(this.props.name)}</td>
         <td>
           <input
             value={this.state.pace}
             data-distance={this.props.distance}
-            onChange={this.handleChange.bind(this)}
+            onChange={this.handleChange}
           >
-          </input></td>
+          </input>
+        </td>
+        <td>{this.props.name}</td>
       </tr>
     );
   }
