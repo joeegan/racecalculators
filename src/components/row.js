@@ -49,5 +49,4 @@ Row.propTypes = {
   distance: React.PropTypes.string,
   pace: React.PropTypes.string,
   update: React.PropTypes.function,
-  handleChange: React.PropTypes.function,
 };

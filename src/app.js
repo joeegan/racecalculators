@@ -1,5 +1,6 @@
 import React from 'react';
 import Row from './components/row';
+import Switcher from './components/switcher';
 import { calculateDistances } from './util/distance';
 import kilometreDistances from './util/kilometre-distances';
 import i18n from './en';
@@ -10,13 +11,24 @@ class App extends React.Component {
     super(props);
     this.state = {
       distances: props.distances,
+      algoName: props.algoName,
     };
     this.update = this.update.bind(this);
+    this.handleSwitchChange = this.handleSwitchChange.bind(this);
   }
 
   update(pace, distance) {
     this.setState({
-      distances: calculateDistances(pace, distance),
+      distances: calculateDistances(pace, distance, this.props.algoName),
+    });
+  }
+
+  handleSwitchChange(ev) {
+    const algoName = ev.target.value;
+    const kPace = this.state.distances.find(d => d.key = 'k').pace;
+    this.setState({
+      distances: calculateDistances(kPace, 1, algoName),
+      algoName,
     });
   }
 
@@ -40,15 +52,7 @@ class App extends React.Component {
         <table>
           <tbody>
             {form}
-            <tr>
-              <td>
-                <select>
-                  <option value="SAME">same</option>
-                  <option value="PROJECTED">projected</option>
-                </select>
-              </td>
-              <td>Method</td>
-            </tr>
+            <Switcher handleChange={this.handleSwitchChange} />
           </tbody>
         </table>
         <p><a href="http://github.com/joeegan/racecalculators">Source code</a></p>
@@ -59,11 +63,13 @@ class App extends React.Component {
 }
 
 App.propTypes = {
-  distances: React.PropTypes.object,
+  distances: React.PropTypes.array,
+  algoName: React.PropTypes.string,
 };
 
 App.defaultProps = {
-  distances: calculateDistances('00:06:38', kilometreDistances.mile)
+  distances: calculateDistances('00:06:38', kilometreDistances.mile, 'SAME'),
+  algoName: 'SAME',
 }
 
 export default App;
