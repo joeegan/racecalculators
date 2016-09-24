@@ -46,7 +46,7 @@ export default class Row extends React.Component {
 
 Row.propTypes = {
   name: React.PropTypes.string,
-  distance: React.PropTypes.string,
+  distance: React.PropTypes.number,
   pace: React.PropTypes.string,
-  update: React.PropTypes.function,
+  update: React.PropTypes.func,
 };
