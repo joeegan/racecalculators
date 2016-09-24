@@ -19,13 +19,13 @@ class App extends Component {
 
   update(pace, distance) {
     this.setState({
-      distances: calculateDistances(pace, distance, this.props.algoName),
+      distances: calculateDistances(pace, distance, this.state.algoName),
     });
   }
 
   handleSwitchChange(ev) {
     const algoName = ev.target.value;
-    const kPace = this.state.distances.find(d => d.key === 'k').pace;
+    const kPace = this.state.distances.find(d => d.name === 'k').pace;
     this.setState({
       distances: calculateDistances(kPace, 1, algoName),
       algoName,
