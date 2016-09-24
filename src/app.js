@@ -55,6 +55,7 @@ class App extends Component {
             <Switcher handleChange={this.handleSwitchChange} />
           </tbody>
         </table>
+        <p className="explanation">{i18n[this.state.algoName]}</p>
         <p><a href="http://github.com/joeegan/racecalculators">Source code</a></p>
       </div>
     );

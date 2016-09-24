@@ -7,6 +7,7 @@ export default class Row extends Component {
     super(props);
     this.state = {
       pace: props.pace,
+      highlighted: false,
     };
     this.handleChange = this.handleChange.bind(this);
   }
@@ -20,7 +21,7 @@ export default class Row extends Component {
   handleChange(ev) {
     const pace = ev.target.value;
     const distance = ev.target.dataset.distance;
-    this.setState({ pace });
+    this.setState({ pace, highlighted: true });
     if (isHoursMinsSecs(pace)) {
       this.props.update(pace, distance);
     }
@@ -34,6 +35,7 @@ export default class Row extends Component {
             value={this.state.pace}
             data-distance={this.props.distance}
             onChange={this.handleChange}
+            className={this.state.highlighted ? 'highlighted' : ''}
           >
           </input>
         </td>

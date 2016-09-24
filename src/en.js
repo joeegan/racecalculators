@@ -9,4 +9,6 @@ module.exports = {
   halfMarathon: 'Half',
   twentyMiles: '20 miles',
   marathon: 'Marathon',
+  PROJECTED: 'With proper training, these are the times you will get based on the highlighted time',
+  SAME: 'If you ran at the highlighted pace at all distances, you would get the shown times',
 };

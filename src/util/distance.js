@@ -6,8 +6,8 @@ import {
 } from './time';
 
 function calculateDistances(pace, distance, algoName) {
+  // distance.highlighted = true;
   const paceSecondsPerK = paceToSeconds(pace) / distance;
-  console.log(kilometreDistances);
   if (algoName === 'PROJECTED') {
     return Object.keys(kilometreDistances).map((d) => ({
       name: d,
