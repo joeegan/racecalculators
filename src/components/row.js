@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { Component, PropTypes } from 'react';
 import { isHoursMinsSecs } from '../util/time';
 
-export default class Row extends React.Component {
+export default class Row extends Component {
 
   constructor(props) {
     super(props);
@@ -45,8 +45,8 @@ export default class Row extends React.Component {
 }
 
 Row.propTypes = {
-  name: React.PropTypes.string,
-  distance: React.PropTypes.number,
-  pace: React.PropTypes.string,
-  update: React.PropTypes.func,
+  name: PropTypes.string,
+  distance: PropTypes.number,
+  pace: PropTypes.string,
+  update: PropTypes.func,
 };

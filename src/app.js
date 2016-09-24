@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { Component, PropTypes } from 'react';
 import Row from './components/row';
 import Switcher from './components/switcher';
 import { calculateDistances } from './util/distance';
 import kilometreDistances from './util/kilometre-distances';
 import i18n from './en';
 
-class App extends React.Component {
+class App extends Component {
 
   constructor(props) {
     super(props);
@@ -25,7 +25,7 @@ class App extends React.Component {
 
   handleSwitchChange(ev) {
     const algoName = ev.target.value;
-    const kPace = this.state.distances.find(d => d.key = 'k').pace;
+    const kPace = this.state.distances.find(d => d.key === 'k').pace;
     this.setState({
       distances: calculateDistances(kPace, 1, algoName),
       algoName,
@@ -63,13 +63,13 @@ class App extends React.Component {
 }
 
 App.propTypes = {
-  distances: React.PropTypes.array,
-  algoName: React.PropTypes.string,
+  distances: PropTypes.array,
+  algoName: PropTypes.string,
 };
 
 App.defaultProps = {
   distances: calculateDistances('00:06:38', kilometreDistances.mile, 'SAME'),
   algoName: 'SAME',
-}
+};
 
 export default App;

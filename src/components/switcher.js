@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { Component } from 'react';
 
-export default class Switcher extends React.Component {
+export default class Switcher extends Component {
 
   render() {
     return (
