@@ -1,4 +1,6 @@
 module.exports = {
+  oneHundred: 0.1,
+  fourHundred: 0.4,
   k: 1,
   mile: 1.609344,
   fiveK: 5,
