@@ -17,7 +17,7 @@ function secondsToPace(secs) {
   const hours = Math.floor(mins / 60);
   const minutes = mins % 60;
   const seconds = Math.round(secs % 60);
-  return [hours, minutes, seconds].map((t) => padLeft(t, 2)).join(':');
+  return [hours, minutes, seconds].map(t => padLeft(t, 2)).join(':');
 }
 
 function riegel(paceSeconds, distanceRecorded, distancePredicted) {

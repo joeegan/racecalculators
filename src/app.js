@@ -27,7 +27,7 @@ class App extends Component {
 
   handleSwitchChange(ev) {
     const algoName = ev.target.value;
-    const pace = this.state.distances.find(d => {
+    const pace = this.state.distances.find((d) => {
       return d.distance === this.state.highlightedDistance;
     }).pace;
     this.setState({
@@ -37,7 +37,7 @@ class App extends Component {
   }
 
   render() {
-    const form = this.state.distances.map((distance) =>
+    const form = this.state.distances.map(distance =>
       <Row
         distance={distance.distance}
         pace={distance.pace}

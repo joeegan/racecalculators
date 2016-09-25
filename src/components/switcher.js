@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-export default  class Switcher extends Component {
+export default class Switcher extends Component {
   render() {
     return (
       <tr>
