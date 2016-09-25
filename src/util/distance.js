@@ -6,21 +6,15 @@ import {
 } from './time';
 
 function calculateDistances(pace, distance, algoName) {
-  // distance.highlighted = true;
   const paceSecondsPerK = paceToSeconds(pace) / distance;
-  if (algoName === 'PROJECTED') {
-    return Object.keys(kilometreDistances).map((d) => ({
-      name: d,
-      distance: kilometreDistances[d],
-      pace: riegel(paceToSeconds(pace), +distance, kilometreDistances[d]),
-    }));
-  } else if (algoName === 'SAME') {
-    return Object.keys(kilometreDistances).map((d) => ({
-      name: d,
-      distance: kilometreDistances[d],
-      pace: secondsToPace(paceSecondsPerK * kilometreDistances[d]),
-    }));
-  }
+  const map = new Map()
+    .set('SAME', (d) => secondsToPace(paceSecondsPerK * kilometreDistances[d]))
+    .set('PROJECTED', (d) => riegel(paceToSeconds(pace), +distance, kilometreDistances[d]));
+  return Object.keys(kilometreDistances).map((d) => ({
+    name: d,
+    distance: kilometreDistances[d],
+    pace: map.get(algoName).call(null, d),
+  }));
 }
 
 module.exports = { calculateDistances };

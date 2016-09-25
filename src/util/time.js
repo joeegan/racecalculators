@@ -1,7 +1,6 @@
 const padLeft = require('./string').padLeft;
 
 function isHoursMinsSecs(pace) {
-  const split = pace.split(':');
   const [hours, mins, secs] = pace.split(':');
   return (hours < 24 && mins < 60 && secs < 60) &&
     !!pace.match(/^[0-9]{2}(:[0-9]{2}){2}$/);

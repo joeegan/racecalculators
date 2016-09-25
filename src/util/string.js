@@ -1,5 +1,3 @@
-'use strict';
-
 module.exports = {
   padLeft: (num, size) => {
     let s = `${num}`;

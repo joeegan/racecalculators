@@ -1,8 +1,9 @@
-const time = require('../../src/util/time');
-const paceToSeconds = time.paceToSeconds;
-const secondsToPace = time.secondsToPace;
-const isHoursMinsSecs = time.isHoursMinsSecs;
-const riegel = time.riegel;
+import {
+  paceToSeconds,
+  secondsToPace,
+  isHoursMinsSecs,
+  riegel,
+} from '../../src/util/time';
 
 function convertsPaceAndSeconds(pace, seconds) {
   expect(paceToSeconds(pace)).toBe(seconds);
