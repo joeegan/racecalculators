@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars, no-undef */
-import { calculateDistances } from '../../src/util/distance';
-import distances from '../../src/util/kilometre-distances';
+import { calculateDistances } from './distance';
+import distances from './kilometre-distances';
 
 it('returns an object using the SAME algorithm', () => {
   const result = calculateDistances('00:00:00', 1, 'SAME');

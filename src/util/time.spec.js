@@ -5,7 +5,7 @@ import {
   secondsToPace,
   isHoursMinsSecs,
   riegel,
-} from '../../src/util/time';
+} from './time';
 
 function convertsPaceAndSeconds(pace, seconds) {
   expect(paceToSeconds(pace)).toBe(seconds);
