@@ -1,4 +1,4 @@
-/* eslint-disable no-var */
+/* eslint-disable no-var, import/no-extraneous-dependencies */
 const webpack = require('webpack');
 const path = require('path');
 

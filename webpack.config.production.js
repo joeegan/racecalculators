@@ -1,6 +1,6 @@
-/* eslint-disable no-var */
+/* eslint-disable no-var, import/no-extraneous-dependencies */
 const webpack = require('webpack');
-vconstar path = require('path');
+const path = require('path');
 
 module.exports = {
   entry: './src/index',
