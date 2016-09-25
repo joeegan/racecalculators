@@ -1,18 +1,18 @@
 const padLeft = require('./string').padLeft;
 
-function isHoursMinsSecs(pace) {
+function isHoursMinsSecs(pace: string): boolean {
   const [hours, mins, secs] = pace.split(':');
   return (hours < 24 && mins < 60 && secs < 60) &&
     !!pace.match(/^[0-9]{2}(:[0-9]{2}){2}$/);
 }
 
-function paceToSeconds(pace) {
+function paceToSeconds(pace: string): string {
   return pace.split(':')
        .map((str, i) => +str * Math.pow(60, 2 - i))
        .reduce((num, prev) => num += prev);
 }
 
-function secondsToPace(secs) {
+function secondsToPace(secs: number): string {
   const mins = Math.floor(secs / 60);
   const hours = Math.floor(mins / 60);
   const minutes = mins % 60;
@@ -20,7 +20,7 @@ function secondsToPace(secs) {
   return [hours, minutes, seconds].map(t => padLeft(t, 2)).join(':');
 }
 
-function riegel(paceSeconds, distanceRecorded, distancePredicted) {
+function riegel(paceSeconds: number, distanceRecorded: number, distancePredicted:number): string {
   return secondsToPace(paceSeconds * (Math.pow((distancePredicted / distanceRecorded), 1.06)));
 }
 

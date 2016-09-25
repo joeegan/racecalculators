@@ -5,7 +5,7 @@ import {
   riegel,
 } from './time';
 
-function calculateDistances(pace, distance, algoName) {
+function calculateDistances(pace: string, distance: number, algoName: string): object {
 
   const paceSecondsPerK = paceToSeconds(pace) / distance;
   const map = new Map()

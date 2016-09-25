@@ -7,7 +7,7 @@ import i18n from './en';
 
 class App extends Component {
 
-  constructor(props) {
+  constructor(props: object) {
     super(props);
     this.state = {
       distances: props.distances,
@@ -18,14 +18,14 @@ class App extends Component {
     this.handleSwitchChange = this.handleSwitchChange.bind(this);
   }
 
-  update(pace, distance) {
+  update(pace: string, distance: number) {
     this.setState({
       distances: calculateDistances(pace, distance, this.state.algoName),
       highlightedDistance: distance,
     });
   }
 
-  handleSwitchChange(ev) {
+  handleSwitchChange(ev: object) {
     const algoName = ev.target.value;
     const pace = this.state.distances.find((d) => {
       return d.distance === this.state.highlightedDistance;
