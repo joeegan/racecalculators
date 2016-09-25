@@ -36,8 +36,7 @@ export default class Row extends Component {
             data-distance={this.props.distance}
             onChange={this.handleChange}
             className={this.props.highlighted ? 'highlighted' : ''}
-          >
-          </input>
+          />
         </td>
         <td>{this.props.name}</td>
       </tr>

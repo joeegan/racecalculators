@@ -1,19 +1,12 @@
 {
+  "extends": ["airbnb", "plugin:react/recommended"],
   "parser": "babel-eslint",
-  "extends": "airbnb",
-  "plugins": [
-    "babel",
-    "import",
-    "react"
-  ],
-  "env": {
-    "browser": true,
-    "node": true,
-    "mocha": true,
-    "es6": true
+  "rules": {
+    "react/display-name": 0,
+    "react/jsx-wrap-multilines": 1,
+    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }]
   },
-  "ecmaFeatures": {
-    "modules": true,
-    "jsx": true
-  }
+  "plugins": [
+    "react"
+  ]
 }
