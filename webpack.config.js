@@ -11,11 +11,7 @@ module.exports = {
   output: {
     path: __dirname,
     filename: 'bundle.js',
-    publicPath: '/static/',
-  },
-  resolve: {
-    extensions: ['', '.js', '.jsx'],
-    root: path.resolve(path.join(__dirname, 'src')),
+    publicPath: '/dist/',
   },
   devtool: 'eval-source-map',
   plugins: [

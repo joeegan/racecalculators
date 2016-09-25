@@ -5,17 +5,15 @@ const path = require('path');
 module.exports = {
   entry: './src/index',
   output: {
-    path: path.join(__dirname, 'dist'),
+    path: __dirname,
     filename: 'bundle.js',
-    publicPath: '/static/',
+    publicPath: '/dist/',
   },
   resolve: {
-    extensions: ['', '.js', '.jsx'],
-    root: path.resolve(path.join(__dirname, 'src')),
+    extensions: ['.js', '.jsx'],
   },
   devtool: 'source-map',
   plugins: [
-    new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.DefinePlugin({
       'process.env': {
         NODE_ENV: JSON.stringify('production'),
