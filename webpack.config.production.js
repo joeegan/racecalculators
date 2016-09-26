@@ -1,19 +1,23 @@
 /* eslint-disable no-var, import/no-extraneous-dependencies */
 const webpack = require('webpack');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
 
 module.exports = {
   entry: './src/index',
   output: {
     path: __dirname,
-    filename: 'bundle.js',
-    publicPath: '/dist/',
+    publicPath: '',
+    filename: 'bundle.[hash].js',
   },
   resolve: {
     extensions: ['.js', '.jsx'],
   },
   devtool: 'source-map',
   plugins: [
+    new HtmlWebpackPlugin({
+      template: 'src/index.html'
+    }),
     new webpack.DefinePlugin({
       'process.env': {
         NODE_ENV: JSON.stringify('production'),
