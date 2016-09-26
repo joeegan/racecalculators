@@ -35,6 +35,7 @@ export default class Row extends Component {
             value={this.state.pace}
             data-distance={this.props.distance}
             onChange={this.handleChange}
+            onFocus={this.handleChange}
             className={this.props.highlighted ? 'highlighted' : ''}
           />
         </td>

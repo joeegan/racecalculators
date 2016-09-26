@@ -60,7 +60,7 @@ class App extends Component {
             <Switcher handleChange={this.handleSwitchChange} />
           </tbody>
         </table>
-        <p className="explanation">{i18n[this.state.algoName]}</p>
+        <p className="explanation">{i18n[this.state.algoName + '_explanation']}</p>
         <p><a href="http://github.com/joeegan/pace">Source code</a></p>
       </div>
     );

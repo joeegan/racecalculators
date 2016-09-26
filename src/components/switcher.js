@@ -1,16 +1,17 @@
 import React, { Component } from 'react';
+import i18n from '../en';
 
 export default class Switcher extends Component {
   render() {
     return (
       <tr>
         <td>
-          <select onChange={this.props.handleChange}>
-            <option value="SAME">same</option>
-            <option value="PROJECTED">projected</option>
+          <select className="highlighted" onChange={this.props.handleChange}>
+            <option value="SAME">{i18n.SAME}</option>
+            <option value="PROJECTED">{i18n.PROJECTED}</option>
           </select>
         </td>
-        <td>Method</td>
+        <td>{i18n.pace}</td>
       </tr>
     );
   }
