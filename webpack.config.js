@@ -12,12 +12,12 @@ module.exports = {
   output: {
     path: __dirname,
     publicPath: '',
-    filename: 'bundle.[hash].js'
+    filename: 'bundle.[hash].js',
   },
   devtool: 'eval-source-map',
   plugins: [
     new HtmlWebpackPlugin({
-      template: 'src/index.html'
+      template: 'index.html',
     }),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoErrorsPlugin(),

@@ -16,7 +16,7 @@ module.exports = {
   devtool: 'source-map',
   plugins: [
     new HtmlWebpackPlugin({
-      template: 'src/index.html'
+      template: 'index.html',
     }),
     new webpack.DefinePlugin({
       'process.env': {
