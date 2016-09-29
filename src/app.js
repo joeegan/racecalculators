@@ -51,8 +51,14 @@ class App extends Component {
       <div className="wrap">
         <h1>
           <span>Pace</span>
-          <i className="material-icons md-light">timer</i>
         </h1>
+        <div className="wrapper">
+          <div className="top"></div>
+          <div className="right"></div>
+          <div className="arc">
+            <div className="second"></div>
+          </div>
+        </div>
         <p>Race/training pace calculator</p>
         <table>
           <tbody>
