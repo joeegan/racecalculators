@@ -13,7 +13,7 @@ class App extends Component {
       distances: props.distances,
       algoName: props.algoName,
       highlightedDistance: props.highlightedDistance,
-      animateToggle: true,
+      animateToggle: false,
     };
     this.update = this.update.bind(this);
     this.handleSwitchChange = this.handleSwitchChange.bind(this);
@@ -49,16 +49,17 @@ class App extends Component {
         highlighted={this.state.highlightedDistance === distance.distance}
       />
     );
-    const animationClass = this.state.animateToggle ? 'second animate' : 'second animateTrigger';
+    let animationClass = 'stopwatch_second';
+    animationClass += this.state.animateToggle ? ' stopwatch_second--animate0' : ' stopwatch_second--animate1';
     return (
       <div className="wrap">
         <h1>
           <span>Pace</span>
         </h1>
-        <div className="wrapper">
-          <div className="top"></div>
-          <div className="right"></div>
-          <div className="arc">
+        <div className="stopwatch">
+          <div className="stopwatch_top"></div>
+          <div className="stopwatch_right"></div>
+          <div className="stopwatch_arc">
             <div className={animationClass}></div>
           </div>
         </div>
