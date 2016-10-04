@@ -8,8 +8,10 @@ export default class Row extends Component {
     this.state = {
       pace: props.pace,
       highlighted: false,
+      invalid: false,
     };
     this.handleChange = this.handleChange.bind(this);
+    this.handleBlur = this.handleBlur.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -21,13 +23,24 @@ export default class Row extends Component {
   handleChange(ev) {
     const pace = ev.target.value;
     const distance = +ev.target.dataset.distance;
-    this.setState({ pace, highlighted: true });
+    this.setState({ pace });
     if (isHoursMinsSecs(pace)) {
+      this.setState({ invalid: false });
       this.props.update(pace, distance);
+    } else {
+      this.setState({ invalid: true });
     }
   }
 
+  handleBlur() {
+    this.setState({
+      highlighted: false,
+    });
+  }
+
   render() {
+    let className = this.props.highlighted ? 'highlighted' : '';
+    className += this.state.invalid ? ' invalid' : ' ';
     return (
       <tr>
         <td>
@@ -35,8 +48,8 @@ export default class Row extends Component {
             value={this.state.pace}
             data-distance={this.props.distance}
             onChange={this.handleChange}
-            onFocus={this.handleChange}
-            className={this.props.highlighted ? 'highlighted' : ''}
+            onBlur={this.handleBlur}
+            className={className}
           />
         </td>
         <td>{this.props.name}</td>

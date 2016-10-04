@@ -13,6 +13,7 @@ class App extends Component {
       distances: props.distances,
       algoName: props.algoName,
       highlightedDistance: props.highlightedDistance,
+      animateToggle: true,
     };
     this.update = this.update.bind(this);
     this.handleSwitchChange = this.handleSwitchChange.bind(this);
@@ -22,6 +23,7 @@ class App extends Component {
     this.setState({
       distances: calculateDistances(pace, distance, this.state.algoName),
       highlightedDistance: distance,
+      animateToggle: !this.state.animateToggle,
     });
   }
 
@@ -47,6 +49,7 @@ class App extends Component {
         highlighted={this.state.highlightedDistance === distance.distance}
       />
     );
+    const animationClass = this.state.animateToggle ? 'second animate' : 'second animateTrigger';
     return (
       <div className="wrap">
         <h1>
@@ -56,7 +59,7 @@ class App extends Component {
           <div className="top"></div>
           <div className="right"></div>
           <div className="arc">
-            <div className="second"></div>
+            <div className={animationClass}></div>
           </div>
         </div>
         <p>Race/training pace calculator</p>

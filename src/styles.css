@@ -76,8 +76,13 @@ input {
    border: 1px solid #fff;
    padding: 3px 0;
 }
+input:focus,
 .highlighted {
   border-color: #61dafb;
+}
+input:focus.invalid,
+input.invalid {
+  border-color: #cc7a6f;
 }
 label {
    text-align: center;
@@ -128,6 +133,24 @@ a {
     -webkit-transform: rotate(360deg);
   }
 }
+@-webkit-keyframes rotate2 {
+  from {
+    -webkit-transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(360deg);
+  }
+}
+.animate {
+  -webkit-animation-name: rotate;
+  -webkit-animation-duration: .5s;
+  -webkit-animation-timing-function: linear;
+}
+.animateTrigger {
+  -webkit-animation-name: rotate2;
+  -webkit-animation-duration: .4s;
+  -webkit-animation-timing-function: linear;
+}
 .second {
   height: calc(100% - 10px);
   width: 5px;
@@ -135,9 +158,6 @@ a {
   background: -webkit-linear-gradient(top, white, white 50%, transparent 50%, transparent 50%);
   top: 5px;
   left: calc(50% - 2.5px);
-  -webkit-animation-name: rotate;
-  -webkit-animation-duration: .5s;
-  -webkit-animation-timing-function: linear;
 }
 .top {
   height: 5px;
