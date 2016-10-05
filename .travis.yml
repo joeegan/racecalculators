@@ -6,7 +6,7 @@ install:
 script:
   - 'npm run clean:dist'
   - 'npm build'
-after_success: 'npm run coverage'
+# after_success: 'npm run coverage'
 deploy:
   provider: s3
   access_key_id: $AWS_ACCESS_KEY # declared in Travis repo settings
