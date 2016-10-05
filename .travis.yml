@@ -7,6 +7,8 @@ script:
   - 'npm run clean:dist'
   - 'npm build'
 deploy:
+  on:
+    all_branches: true
   provider: s3
   access_key_id: $AWS_ACCESS_KEY # declared in Travis repo settings
   secret_access_key: $AWS_SECRET_KEY
