@@ -1,7 +1,25 @@
 language: node_js
 node_js:
   - '5'
+install:
+  - 'npm install'
+script:
+  - 'npm build'
 after_success: 'npm run coverage'
 branches:
   only:
   - master
+deploy:
+  provider: s3
+  access_key_id: $AWS_ACCESS_KEY # declared in Travis repo settings
+  secret_access_key: $AWS_SECRET_KEY
+  bucket: pace-app
+  endpoint: pace-app.s3-website-eu-west-1.amazonaws.com
+  region: Ireland
+  skip_cleanup: true
+  local-dir: output
+  acl: public_read
+  detect_encoding: true
+notifications:
+  email:
+    on_failure: always
