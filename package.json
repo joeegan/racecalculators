@@ -4,7 +4,7 @@
   "description": "Running pace calculator",
   "main": "index.js",
   "scripts": {
-    "clean:dist": "rimraf dist",
+    "clean:dist": "node_modules/.bin/rimraf dist",
     "start": "node server.js",
     "build": "node_modules/.bin/webpack --config webpack.config.production.js",
     "flow": "flow; test $? -eq 0 -o $? -eq 2",
