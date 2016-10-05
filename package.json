@@ -9,7 +9,7 @@
     "build": "node_modules/.bin/webpack --config webpack.config.production.js",
     "flow": "flow; test $? -eq 0 -o $? -eq 2",
     "test": "jest --coverage",
-    "lint": "eslint src"
+    "lint": "./node_modules/.bin/eslint src --ignore-path .gitignore"
   },
   "repository": {
     "type": "git",
