@@ -66,11 +66,11 @@ class App extends Component {
         <p>Race/training pace calculator</p>
         <table>
           <tbody>
+            <Switcher algoName={this.state.algoName} handleChange={this.handleSwitchChange} />
+            <p className="explanation">{i18n[this.state.algoName + '_explanation']}</p>
             {form}
-            <Switcher handleChange={this.handleSwitchChange} />
           </tbody>
         </table>
-        <p className="explanation">{i18n[this.state.algoName + '_explanation']}</p>
         <p><a href="http://github.com/joeegan/pace">Source code</a></p>
       </div>
     );

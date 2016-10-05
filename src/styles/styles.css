@@ -29,6 +29,12 @@ p {
   text-transform: uppercase;
   font-size: 16px;
   text-indent: 1px;
+  margin: 10px 0;
+}
+
+p.explanation {
+  text-transform: none;
+  font-size: 12px;
 }
 
 a {
@@ -73,6 +79,10 @@ label {
   display: block;
 }
 
+.switcher {
+
+}
+
 h2 {
   text-align: center;
 }
@@ -87,10 +97,6 @@ td {
 
 td:last-child {
    text-align: left;
-}
-
-.explanation {
-  text-transform: none;
 }
 
 .wrap {

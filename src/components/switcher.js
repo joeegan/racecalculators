@@ -4,14 +4,18 @@ import i18n from '../i18n/en';
 export default class Switcher extends Component {
   render() {
     return (
-      <tr>
+      <tr className="switcher">
         <td>
-          <select className="highlighted" onChange={this.props.handleChange}>
-            <option value="SAME">{i18n.SAME}</option>
-            <option value="PROJECTED">{i18n.PROJECTED}</option>
-          </select>
+          <label>
+            {i18n.SAME}
+            <input type="radio" checked={this.props.algoName === "SAME"} onChange={this.props.handleChange} value="SAME" />
+          </label>
+          <label>
+            {i18n.PROJECTED}
+            <input type="radio" checked={this.props.algoName === "PROJECTED"}
+              onChange={this.props.handleChange} value="PROJECTED"/>
+          </label>
         </td>
-        <td>{i18n.pace}</td>
       </tr>
     );
   }
