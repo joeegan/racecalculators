@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import i18n from '../en';
+import i18n from '../i18n/en';
 
 export default class Switcher extends Component {
   render() {

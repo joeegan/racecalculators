@@ -3,7 +3,7 @@ import Row from './components/row';
 import Switcher from './components/switcher';
 import { calculateDistances } from './util/distance';
 import kilometreDistances from './util/kilometre-distances';
-import i18n from './en';
+import i18n from './i18n/en';
 
 class App extends Component {
 

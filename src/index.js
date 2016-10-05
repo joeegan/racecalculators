@@ -1,8 +1,8 @@
 import React from 'react';
 import { render } from 'react-dom';
 import App from './app';
-import styles from './styles.css';
-import stopwatch from './stopwatch.css';
+import styles from './styles/styles.css';
+import stopwatch from './styles/stopwatch.css';
 import favicon from './favicon.ico';
 import sw from './service-worker';
 
