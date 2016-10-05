@@ -4,6 +4,7 @@ node_js:
 install:
   - 'npm install'
 script:
+  - 'npm run clean:dist'
   - 'npm build'
 after_success: 'npm run coverage'
 deploy:
@@ -14,7 +15,7 @@ deploy:
   endpoint: pace-app.s3-website-eu-west-1.amazonaws.com
   region: Ireland
   skip_cleanup: true
-  local-dir: output
+  local-dir: dist
   acl: public_read
   detect_encoding: true
 notifications:
