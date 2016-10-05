@@ -1,7 +1,0 @@
-[ignore]
-.*/esdoc/.*
-.*/dist/.*
-.*/node_modules/**/.*
-
-[include]
-.*/src/**/.*
