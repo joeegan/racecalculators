@@ -6,6 +6,7 @@ install:
 script:
   - 'npm run clean:dist'
   - 'npm build'
+  - 'ls -lah'
 deploy:
   on:
     all_branches: true
@@ -13,7 +14,6 @@ deploy:
   access_key_id: $AWS_ACCESS_KEY # declared in Travis repo settings
   secret_access_key: $AWS_SECRET_KEY
   bucket: pace-app
-  endpoint: pace-app.s3-website-eu-west-1.amazonaws.com
   region: eu-west-1
   skip_cleanup: true
   local-dir: dist
