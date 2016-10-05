@@ -4,19 +4,19 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
 
 module.exports = {
-  entry: './src/index',
+  entry: './index',
   output: {
-    path: __dirname,
-    publicPath: '',
+    path: path.resolve(__dirname, 'dist'),
     filename: 'bundle.[hash].js',
   },
   resolve: {
     extensions: ['.js', '.jsx'],
   },
+  context: path.resolve(__dirname, 'src'),
   devtool: 'source-map',
   plugins: [
     new HtmlWebpackPlugin({
-      template: 'index.html',
+      template: './index.html',
     }),
     new webpack.DefinePlugin({
       'process.env': {
@@ -35,6 +35,14 @@ module.exports = {
         test: /\.jsx?$/,
         loaders: ['babel'],
         include: path.join(__dirname, 'src'),
+      },
+      {
+        test: /\.css$/,
+        loader: 'style-loader!css-loader',
+      },
+      {
+        test: /\.jpe?g$|\.ico$|\.gif$|\.png$|\.svg$|\.woff$|\.ttf$|\.wav$|\.mp3$/,
+        loader: 'file-loader?name=[name].[ext]',
       },
     ],
   },

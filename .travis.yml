@@ -1,3 +1,23 @@
 language: node_js
 node_js:
   - '5'
+install:
+  - 'npm install'
+script:
+  - 'npm run clean:dist'
+  - 'npm run build'
+deploy:
+  on:
+    all_branches: true
+  provider: s3
+  access_key_id: $AWS_ACCESS_KEY # declared in Travis repo settings
+  secret_access_key: $AWS_SECRET_KEY
+  bucket: pace-app
+  region: eu-west-1
+  skip_cleanup: true
+  local-dir: dist
+  acl: public_read
+  detect_encoding: true
+notifications:
+  email:
+    on_failure: always
