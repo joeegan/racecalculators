@@ -44,6 +44,7 @@ export default class Row extends Component {
     return (
       <label className={className}>
         <input
+          type="text"
           value={this.state.pace}
           data-distance={this.props.distance}
           onChange={this.handleChange}
