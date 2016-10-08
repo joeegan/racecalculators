@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import Row from './components/row';
 import Algo from './components/algo';
+import DistanceAdder from './components/distance-adder';
 import { calculateDistances } from './util/distance';
 import kilometreDistances from './util/kilometre-distances';
 import i18n from './i18n/en';
@@ -14,11 +15,13 @@ class App extends Component {
       selectedAlgoName: props.selectedAlgoName,
       calculatedDistance: props.calculatedDistance,
       animateToggle: false,
+      showAddField: false,
       algos: ['SAME', 'PROJECTED']
     };
     this.update = this.update.bind(this);
     this.handleSwitchChange = this.handleSwitchChange.bind(this);
     this.handleRemove = this.handleRemove.bind(this);
+    this.handleAdd = this.handleRemove.bind(this);
   }
 
   update(pace: string, distance: number) {
@@ -49,6 +52,13 @@ class App extends Component {
       distances: this.state.distances.filter(d => {
         return d.distance !== distance;
       })
+    });
+  }
+
+  handleAdd() {
+    debugger;
+    this.setState({
+      showAddField: true
     });
   }
 
@@ -85,7 +95,10 @@ class App extends Component {
           </div>
         </div>
         <div className="switcher">{algos}</div>
-        <form>{distances}</form>
+        <form>
+          {distances}
+          <DistanceAdder handleAdd={this.handleAdd} />
+        </form>
         <a href={i18n['source_code_url']}>
           {i18n['source_code']}
         </a>

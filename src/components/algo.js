@@ -7,19 +7,6 @@ export default class Algo extends Component {
     return this.props.selectedAlgoName === this.props.name;
   }
 
-  explanation() {
-    return (
-      <p className='explanation'>
-        <span>
-          {i18n[this.props.name + '_explanation']}
-          <a href={i18n[this.props.name + '_url']}>
-            {i18n[this.props.name + '_link']}
-          </a>
-        </span>
-      </p>
-    )
-  }
-
   render() {
     return (
       <div>
@@ -32,7 +19,14 @@ export default class Algo extends Component {
             value={this.props.name}
           />
         </label>
-        {this.explanation()}
+        <p className='explanation'>
+          <span>
+            {i18n[this.props.name + '_explanation']}
+            <a href={i18n[this.props.name + '_url']}>
+              {i18n[this.props.name + '_link']}
+            </a>
+          </span>
+        </p>
       </div>
     )
   }

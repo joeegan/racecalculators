@@ -49,10 +49,11 @@ export default class Row extends Component {
     className += this.state.invalid ? ' row--invalid' : '';
     return (
       <label className={className}>
-        <i className="material-icons"
-           onClick={this.handleRemove}
-        >
-          remove_circle_outline</i>
+        <button onClick={this.handleRemove}>
+          <i className="material-icons">
+            remove_circle_outline
+          </i>
+        </button>
         <input
           type="text"
           value={this.state.pace}
