@@ -42,18 +42,16 @@ export default class Row extends Component {
     let className = this.props.highlighted ? 'highlighted' : '';
     className += this.state.invalid ? ' invalid' : ' ';
     return (
-      <tr>
-        <td>
-          <input
-            value={this.state.pace}
-            data-distance={this.props.distance}
-            onChange={this.handleChange}
-            onBlur={this.handleBlur}
-            className={className}
-          />
-        </td>
-        <td>{this.props.name}</td>
-      </tr>
+      <label className={className}>
+        <input
+          value={this.state.pace}
+          data-distance={this.props.distance}
+          onChange={this.handleChange}
+          onBlur={this.handleBlur}
+          className={className}
+        />
+        {this.props.name}
+      </label>
     );
   }
 

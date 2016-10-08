@@ -1,6 +1,23 @@
+.material-icons.md-18 { font-size: 18px; }
+.material-icons.md-24 { font-size: 24px; }
+.material-icons.md-36 { font-size: 36px; }
+.material-icons.md-48 { font-size: 48px; }
+
+/* Rules for using icons as black on a light background. */
+.material-icons.md-dark { color: rgba(0, 0, 0, 0.54); }
+.material-icons.md-dark.md-inactive { color: rgba(0, 0, 0, 0.26); }
+
+/* Rules for using icons as white on a dark background. */
+.material-icons.md-light { color: rgba(255, 255, 255, 1); }
+.material-icons.md-light.md-inactive { color: rgba(255, 255, 255, 0.3); }
+
+body .material-icons {
+  margin-right: 5px;
+  vertical-align: bottom;
+}
+
 body {
-  background: #2d2d2d;
-  color: #eee;
+  color: #444;
   font-family: proxima-nova, 'Helvetica Neue', Helvetica, Roboto, Arial, sans-serif;
 }
 
@@ -16,43 +33,60 @@ h2 {
 }
 
 h1 {
-  font-size: 64px;
-  color: #61dafb;
+  font-size: 70px;
+  color: #444;
   margin: 0;
-  text-indent: -2px;
+  text-indent: 2px;
   letter-spacing: -3px;
-  font-weight: 400;
+  font-weight: 100;
+  font-style: italic;
   display: inline-block;
 }
 
-p {
+h2 {
   text-transform: uppercase;
+}
+
+p {
   font-size: 16px;
-  text-indent: 1px;
-  margin: 10px 0;
+  margin: 3px 0 10px 0;
+}
+
+p a {
+  margin-left: 5px;
 }
 
 p.explanation {
   text-transform: none;
   font-size: 12px;
+  display: flex;
 }
 
 a {
-  color: #61dafb;
-  text-align: center;
-  display: block;
-  margin: 30px 0 10px;
+  color: #3b99fc;
+  margin: 0;
   font-size: 12px;
+  text-decoration: none;
 }
 
 select, input {
   margin: 0;
-  color: #fff;
+  color: #444;
   outline: none;
   text-align: center;
-  border: 1px solid #fff;
+  border: 1px solid #444;
   border-radius: 0;
   background: none;
+}
+
+form label {
+  display: flex;
+  margin-bottom: 10px;
+  line-height: 24px;
+}
+
+form input {
+  margin-right: 10px;
 }
 
 select {
@@ -66,7 +100,8 @@ input {
 
 input:focus,
 .highlighted {
-  border-color: #61dafb;
+  border-color: #3b99fc;
+  color: #3b99fc;
 }
 
 input:focus.invalid,
@@ -80,7 +115,17 @@ label {
 }
 
 .switcher {
+  margin-bottom: 18px;
+}
 
+.switcher label {
+  text-align: left;
+  line-height: 24px;
+}
+
+.switcher input {
+  margin-left: 5px;
+  margin-right: 5px;
 }
 
 h2 {
@@ -101,5 +146,5 @@ td:last-child {
 
 .wrap {
    width: 277px;
-   margin: 20px auto;
+   margin: 0 auto;
 }
