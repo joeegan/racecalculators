@@ -12,6 +12,7 @@ export default class Row extends Component {
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleBlur = this.handleBlur.bind(this);
+    this.handleRemove = this.handleRemove.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -32,6 +33,10 @@ export default class Row extends Component {
     }
   }
 
+  handleRemove() {
+    this.props.handleRemove(this.props.distance);
+  }
+
   handleBlur() {
     this.setState({
       highlighted: false,
@@ -39,17 +44,21 @@ export default class Row extends Component {
   }
 
   render() {
-    let className = this.props.highlighted ? 'highlighted' : '';
-    className += this.state.invalid ? ' invalid' : ' ';
+    let className = 'row'
+    className += this.props.highlighted ? ' row--highlighted' : '';
+    className += this.state.invalid ? ' row--invalid' : '';
     return (
       <label className={className}>
+        <i className="material-icons"
+           onClick={this.handleRemove}
+        >
+          remove_circle_outline</i>
         <input
           type="text"
           value={this.state.pace}
           data-distance={this.props.distance}
           onChange={this.handleChange}
           onBlur={this.handleBlur}
-          className={className}
         />
         {this.props.name}
       </label>

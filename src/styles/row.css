@@ -1,0 +1,25 @@
+.row {
+  display: flex;
+  margin-bottom: 10px;
+  line-height: 24px;
+}
+
+.row input {
+  margin-right: 10px;
+}
+
+.row input:focus,
+.row--highlighted input {
+  border-color: #3b99fc;
+  color: #3b99fc;
+}
+
+.row--invalid input:focus,
+.row--invalid input {
+  border-color: #cc7a6f;
+  color: #cc7a6f;
+}
+
+.row i {
+  cursor: pointer;
+}

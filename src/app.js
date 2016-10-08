@@ -18,6 +18,7 @@ class App extends Component {
     };
     this.update = this.update.bind(this);
     this.handleSwitchChange = this.handleSwitchChange.bind(this);
+    this.handleRemove = this.handleRemove.bind(this);
   }
 
   update(pace: string, distance: number) {
@@ -39,6 +40,14 @@ class App extends Component {
     });
   }
 
+  handleRemove(distance: number) {
+    this.setState({
+      distances: this.state.distances.filter(d => {
+        return d.distance !== distance;
+      })
+    });
+  }
+
   render() {
     const distances = this.state.distances.map(distance =>
       <Row
@@ -47,6 +56,7 @@ class App extends Component {
         key={distance.name}
         name={i18n[distance.name]}
         update={this.update}
+        handleRemove={this.handleRemove}
         highlighted={this.state.calculatedDistance === distance.distance}
       />
     );

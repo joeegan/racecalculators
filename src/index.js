@@ -1,8 +1,11 @@
 import React from 'react';
 import { render } from 'react-dom';
 import App from './app';
-import styles from './styles/styles.css';
+import app from './styles/app.css';
 import stopwatch from './styles/stopwatch.css';
+import algos from './styles/algos.css';
+import row from './styles/row.css';
+import icons from './styles/icons.css';
 import favicon from './favicon.ico';
 import sw from './service-worker';
 
