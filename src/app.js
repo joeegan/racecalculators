@@ -22,8 +22,12 @@ class App extends Component {
   }
 
   update(pace: string, distance: number) {
+    const distances = this.state.distances.reduce((acc, d) => {
+      acc[d.name] = d.distance;
+      return acc;
+    }, {});
     this.setState({
-      distances: calculateDistances(pace, distance, this.state.selectedAlgoName),
+      distances: calculateDistances(pace, distance, this.state.selectedAlgoName, distances),
       calculatedDistance: distance,
       animateToggle: !this.state.animateToggle,
     });
