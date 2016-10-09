@@ -9,14 +9,21 @@ function calculateDistances(pace: string, distance: number, algoName: string, di
 
   const paceSecondsPerK = paceToSeconds(pace) / distance;
   const map = new Map()
-    .set('SAME', d => secondsToPace(paceSecondsPerK * kilometreDistances[d]))
-    .set('PROJECTED', d => riegel(paceToSeconds(pace), +distance, kilometreDistances[d]));
+    .set('SAME', d => secondsToPace(paceSecondsPerK * d))
+    .set('PROJECTED', d => riegel(paceToSeconds(pace), +distance, d));
 
-  return Object.keys(distances).map(d => ({
-    name: d,
-    distance: kilometreDistances[d],
-    pace: map.get(algoName).call(null, d),
-  }));
+  return Object.keys(distances).map(d => {
+    const distance = kilometreDistances[d] || (d.match(/k$/) ? parseInt(d) : milesToK(parseInt(d)));
+    return {
+      name: d,
+      distance: distance,
+      pace: map.get(algoName).call(null, distance),
+    }
+  });
 }
 
-module.exports = { calculateDistances };
+function milesToK(milesDistance: number): number {
+  return milesDistance * 1.6;
+}
+
+module.exports = { calculateDistances, milesToK };

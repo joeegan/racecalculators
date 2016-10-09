@@ -3,6 +3,7 @@ import { render } from 'react-dom';
 import App from './app';
 import app from './styles/app.css';
 import stopwatch from './styles/stopwatch.css';
+import distanceAdder from './styles/distance-adder.css';
 import algos from './styles/algos.css';
 import row from './styles/row.css';
 import icons from './styles/icons.css';

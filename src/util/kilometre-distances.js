@@ -1,12 +1,8 @@
 module.exports = {
-  oneHundred: 0.1,
-  fourHundred: 0.4,
-  k: 1,
-  mile: 1.609344,
-  fiveK: 5,
-  tenK: 10,
-  tenMiles: 16.0934,
+  '1k': 1,
+  '1miles': 1.609344,
+  '5k': 5,
+  '10k': 10,
   halfMarathon: 21.097494,
-  twentyMiles: 32.1869,
   marathon: 42.194988,
 };

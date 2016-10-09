@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import Row from './components/row';
 import Algo from './components/algo';
 import DistanceAdder from './components/distance-adder';
-import { calculateDistances } from './util/distance';
+import { calculateDistances, milesToK } from './util/distance';
 import kilometreDistances from './util/kilometre-distances';
 import i18n from './i18n/en';
 
@@ -15,13 +15,12 @@ class App extends Component {
       selectedAlgoName: props.selectedAlgoName,
       calculatedDistance: props.calculatedDistance,
       animateToggle: false,
-      showAddField: false,
       algos: ['SAME', 'PROJECTED']
     };
     this.update = this.update.bind(this);
     this.handleSwitchChange = this.handleSwitchChange.bind(this);
     this.handleRemove = this.handleRemove.bind(this);
-    this.handleAdd = this.handleRemove.bind(this);
+    this.handleAdd = this.handleAdd.bind(this);
   }
 
   update(pace: string, distance: number) {
@@ -38,11 +37,16 @@ class App extends Component {
 
   handleSwitchChange(ev: object) {
     const selectedAlgoName = ev.target.value;
-    const pace = this.state.distances.find((d) => {
+    const distances = this.state.distances.reduce((acc, d) => {
+      acc[d.name] = d.distance;
+      return acc;
+    }, {});
+    const currentDistance = this.state.distances.find((d) => {
       return d.distance === this.state.calculatedDistance;
-    }).pace;
+    });
+    const pace = currentDistance ? currentDistance.pace : this.state.distances[0].pace;
     this.setState({
-      distances: calculateDistances(pace, this.state.calculatedDistance, selectedAlgoName),
+      distances: calculateDistances(pace, this.state.calculatedDistance, selectedAlgoName, distances),
       selectedAlgoName,
     });
   }
@@ -51,29 +55,36 @@ class App extends Component {
     this.setState({
       distances: this.state.distances.filter(d => {
         return d.distance !== distance;
-      })
+      }),
     });
   }
 
-  handleAdd() {
-    debugger;
+  handleAdd(distance, metric) {
+    const distances = this.state.distances.reduce((acc, d) => {
+      acc[d.name] = d.distance;
+      return acc;
+    }, {});
+    distances[`${distance}${metric}`] = metric === 'k' ? distance : milesToK(distance);
     this.setState({
-      showAddField: true
+      distances: calculateDistances('00:06:00', 5, this.state.selectedAlgoName, distances)
     });
   }
 
   render() {
-    const distances = this.state.distances.map(distance =>
-      <Row
-        distance={distance.distance}
-        pace={distance.pace}
-        key={distance.name}
-        name={i18n[distance.name]}
-        update={this.update}
-        handleRemove={this.handleRemove}
-        highlighted={this.state.calculatedDistance === distance.distance}
-      />
-    );
+    const distances = this.state.distances.map(distance => {
+      const name = i18n[distance.name] || distance.name;
+      return (
+        <Row
+          distance={distance.distance}
+          pace={distance.pace}
+          key={name}
+          name={name}
+          update={this.update}
+          handleRemove={this.handleRemove}
+          highlighted={this.state.calculatedDistance === distance.distance}
+        />
+      );
+    });
     const algos = this.state.algos.map(algo =>
       <Algo
         selectedAlgoName={this.state.selectedAlgoName}
@@ -97,8 +108,8 @@ class App extends Component {
         <div className="switcher">{algos}</div>
         <form>
           {distances}
-          <DistanceAdder handleAdd={this.handleAdd} />
         </form>
+        <DistanceAdder handleAdd={this.handleAdd} />
         <a href={i18n['source_code_url']}>
           {i18n['source_code']}
         </a>
@@ -115,8 +126,8 @@ App.propTypes = {
 };
 
 App.defaultProps = {
-  calculatedDistance: kilometreDistances.mile,
-  distances: calculateDistances('00:06:38', kilometreDistances.mile, 'SAME'),
+  calculatedDistance: kilometreDistances['1miles'],
+  distances: calculateDistances('00:06:38', kilometreDistances['1miles'], 'SAME'),
   selectedAlgoName: 'SAME',
 };
 

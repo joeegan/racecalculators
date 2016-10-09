@@ -1,0 +1,11 @@
+.distance-adder_hint {
+  font-size: small;
+}
+
+div .distance-adder span:hover,
+.distance-adder i:hover {
+  color: #3b99fc;
+}
+.distance-adder span {
+  cursor: pointer;
+}

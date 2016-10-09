@@ -7,10 +7,11 @@ export default class DistanceAdder extends Component {
     super(props);
     this.state = {
       showInput: false,
-      checked: "K",
+      selectedMetric: 'k',
     };
     this.showInput = this.showInput.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleRadioChange = this.handleRadioChange.bind(this);
   }
 
   showInput(ev) {
@@ -21,41 +22,56 @@ export default class DistanceAdder extends Component {
   }
 
   handleSubmit(ev) {
-    debugger;
+    ev.preventDefault();
+    const distance = +ev.target[0].value;
+    const metric = this.state.selectedMetric;
+    this.props.handleAdd(distance, metric);
+  }
+
+  handleRadioChange(ev) {
+    this.setState({
+      selectedMetric: ev.target.value,
+    })
   }
 
   form() {
+    const radios = ['k', 'miles'].map((metric) => {
+      return (
+        <label key={metric}>
+          <input
+            type="radio"
+            checked={this.state.selectedMetric === metric}
+            onChange={this.handleRadioChange}
+            value={metric}
+          />
+          {metric}
+        </label>
+      );
+    });
     if (this.state.showInput) {
       return (
-        <div>
-          <input type="text" />
-          <label>
-            <input type="radio" checked={this.state.checked === "K"} />
-            K
-          </label>
-          <label>
-            <input type="radio" checked={this.state.checked === "Miles"}/>
-            Miles
-          </label>
-          <button onClick={this.handleSubmit}>
-            <i className="material-icons">
-              add_circle
-            </i>
-            Add a distance
-          </button>
-        </div>
+        <form onSubmit={this.handleSubmit}>
+          <input type="text" autoFocus="true" />
+          {radios}
+          <p className="distance-adder_hint">
+            Press Enter to submit new distance
+          </p>
+        </form>
+      )
+    } else {
+      return (
+        <span>Add a distance</span>
       )
     }
   }
 
   render() {
     return (
-      <label className="row">
+      <label className="row distance-adder">
         <button onClick={this.showInput}>
           <i className="material-icons">
             add_circle_outline
           </i>
-          Add a distance
         </button>
         {this.form()}
       </label>

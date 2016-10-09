@@ -8,6 +8,22 @@
   margin-right: 10px;
 }
 
+.row button {
+  border: none;
+  background: none;
+  cursor: pointer;
+  color: #999;
+  height: 25px;
+}
+
+*:active, *:focus {
+  outline: none;
+}
+
+.row span:hover {
+  color: #cc7a6f;
+}
+
 .row input:focus,
 .row--highlighted input {
   border-color: #3b99fc;
@@ -20,6 +36,9 @@
   color: #cc7a6f;
 }
 
-.row i {
-  cursor: pointer;
+.row label {
+  margin-right: 10px;
+}
+.row label input {
+  margin-right: 5px;
 }
