@@ -1,7 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import Row from './components/row';
 import Algo from './components/algo';
-import DistanceAdder from './components/distance-adder';
+import DistanceCreatorToggler from './components/distance-creator-toggler';
+import StopwatchIcon from './components/stopwatch-icon';
 import { calculateDistances, milesToK } from './util/distance';
 import kilometreDistances from './util/kilometre-distances';
 import i18n from './i18n/en';
@@ -17,19 +18,15 @@ class App extends Component {
       animateToggle: false,
       algos: ['SAME', 'PROJECTED']
     };
-    this.update = this.update.bind(this);
+    this.handlePaceChange = this.handlePaceChange.bind(this);
     this.handleSwitchChange = this.handleSwitchChange.bind(this);
     this.handleRemove = this.handleRemove.bind(this);
     this.handleAdd = this.handleAdd.bind(this);
   }
 
-  update(pace: string, distance: number) {
-    const distances = this.state.distances.reduce((acc, d) => {
-      acc[d.name] = d.distance;
-      return acc;
-    }, {});
+  handlePaceChange(pace: string, distance: number) {
     this.setState({
-      distances: calculateDistances(pace, distance, this.state.selectedAlgoName, distances),
+      distances: calculateDistances(pace, distance, this.state.selectedAlgoName, this.distancesMap),
       calculatedDistance: distance,
       animateToggle: !this.state.animateToggle,
     });
@@ -59,33 +56,23 @@ class App extends Component {
     });
   }
 
-  handleAdd(distance, metric) {
-    const distances = this.state.distances.reduce((acc, d) => {
-      acc[d.name] = d.distance;
-      return acc;
-    }, {});
-    distances[`${distance}${metric}`] = metric === 'k' ? distance : milesToK(distance);
+  handleAdd(distance: number, metric: string) {
+    const key = `${distance}${metric}`;
+    const distanceMap = Object.assign({
+      [key]: metric === 'k' ? distance : milesToK(distance),
+    }, this.distanceMap);
     this.setState({
-      distances: calculateDistances('00:06:00', 5, this.state.selectedAlgoName, distances)
+      distances: calculateDistances(
+        '00:06:00',
+        5,
+        this.state.selectedAlgoName,
+        distanceMap
+      ),
     });
   }
 
-  render() {
-    const distances = this.state.distances.map(distance => {
-      const name = i18n[distance.name] || distance.name;
-      return (
-        <Row
-          distance={distance.distance}
-          pace={distance.pace}
-          key={name}
-          name={name}
-          update={this.update}
-          handleRemove={this.handleRemove}
-          highlighted={this.state.calculatedDistance === distance.distance}
-        />
-      );
-    });
-    const algos = this.state.algos.map(algo =>
+  get algos() {
+    return this.state.algos.map(algo =>
       <Algo
         selectedAlgoName={this.state.selectedAlgoName}
         key={algo}
@@ -93,23 +80,41 @@ class App extends Component {
         handleChange={this.handleSwitchChange}
       />
     );
-    let animationClass = 'stopwatch_second';
-    animationClass += this.state.animateToggle ? ' stopwatch_second--animate0' : ' stopwatch_second--animate1';
+  }
+
+  get rows() {
+    return this.state.distances.map(distance => {
+      const name = i18n[distance.name] || distance.name;
+      return (
+        <Row
+          distance={distance.distance}
+          pace={distance.pace}
+          key={name}
+          name={name}
+          handlePaceChange={this.handlePaceChange}
+          handleRemove={this.handleRemove}
+          highlighted={this.state.calculatedDistance === distance.distance}
+        />
+      );
+    });
+  }
+
+  get distanceMap() {
+    return this.state.distances.reduce((acc, d) => {
+      acc[d.name] = d.distance;
+      return acc;
+    }, {});
+  }
+
+  render() {
     return (
       <div className="wrap">
         <h1>Pace</h1>
-        <div className="stopwatch">
-          <div className="stopwatch_top"></div>
-          <div className="stopwatch_right"></div>
-          <div className="stopwatch_arc">
-            <div className={animationClass}></div>
-          </div>
-        </div>
-        <div className="switcher">{algos}</div>
-        <form>
-          {distances}
-        </form>
-        <DistanceAdder handleAdd={this.handleAdd} />
+        <StopwatchIcon toggled={this.state.animateToggle} />
+        <div className="switcher">{this.algos}</div>
+        <form>{this.rows}</form>
+        <DistanceCreatorToggler handleShowCreator={this.handleShowCreator}
+          handleAdd={this.handleAdd} />
         <a href={i18n['source_code_url']}>
           {i18n['source_code']}
         </a>

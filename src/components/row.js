@@ -15,19 +15,17 @@ export default class Row extends Component {
     this.handleRemove = this.handleRemove.bind(this);
   }
 
-  componentWillReceiveProps(nextProps) {
-    this.setState({
-      pace: nextProps.pace,
-    });
+  componentWillReceiveProps({pace}) {
+    this.setState({ pace });
   }
 
-  handleChange(ev) {
-    const pace = ev.target.value;
-    const distance = +ev.target.dataset.distance;
+  handleChange({ target }) {
+    const pace = target.value;
+    const distance = +target.dataset.distance;
     this.setState({ pace });
     if (isHoursMinsSecs(pace)) {
       this.setState({ invalid: false });
-      this.props.update(pace, distance);
+      this.props.handlePaceChange(pace, distance);
     } else {
       this.setState({ invalid: true });
     }
@@ -43,12 +41,16 @@ export default class Row extends Component {
     });
   }
 
-  render() {
+  get labelClassName() {
     let className = 'row'
     className += this.props.highlighted ? ' row--highlighted' : '';
     className += this.state.invalid ? ' row--invalid' : '';
+    return className;
+  }
+
+  render() {
     return (
-      <label className={className}>
+      <label className={this.labelClassName}>
         <button onClick={this.handleRemove}
                 title="Remove">
           <span className="material-icons">
@@ -74,5 +76,6 @@ Row.propTypes = {
   highlighted: PropTypes.bool,
   distance: PropTypes.number,
   pace: PropTypes.string,
-  update: PropTypes.func,
+  handlePaceChange: PropTypes.func,
+  handleRemove: PropTypes.func,
 };
