@@ -1,10 +1,22 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import i18n from '../i18n/en';
 
 export default class Algo extends Component {
 
-  selected() {
+  get selected() {
     return this.props.selectedAlgoName === this.props.name;
+  }
+
+  get explanation() {
+    return i18n[`${this.props.name}_explanation`];
+  }
+
+  get linkUrl() {
+    return i18n[`${this.props.name}_url`];
+  }
+
+  get linkText() {
+    return i18n[`${this.props.name}_link`];
   }
 
   render() {
@@ -14,16 +26,16 @@ export default class Algo extends Component {
           {i18n[this.props.name]}
           <input
             type="radio"
-            checked={this.selected()}
+            checked={this.selected}
             onChange={this.props.handleChange}
             value={this.props.name}
           />
         </label>
         <p className='explanation'>
           <span>
-            {i18n[this.props.name + '_explanation']}
-            <a href={i18n[this.props.name + '_url']}>
-              {i18n[this.props.name + '_link']}
+            {this.explanation}
+            <a href={this.linkUrl}>
+              {this.linkText}
             </a>
           </span>
         </p>
@@ -31,3 +43,9 @@ export default class Algo extends Component {
     )
   }
 }
+
+Algo.propTypes = {
+  name: PropTypes.string,
+  selectedAlgoName: PropTypes.string,
+  handleChange: PropTypes.func,
+};
