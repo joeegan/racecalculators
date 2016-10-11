@@ -15,10 +15,9 @@ class App extends Component {
     this.state = {
       distances: props.distances,
       selectedAlgoName: props.selectedAlgoName,
-      calculatedDistance: props.calculatedDistance,
+      calculatedDistance: props.calculatedDistance, // e.g 5
       distanceMap: props.distanceMap,
       animateToggle: false,
-      algos: ['SAME', 'PROJECTED'],
       error: null,
     };
     this.handlePaceChange = this.handlePaceChange.bind(this);
@@ -36,12 +35,8 @@ class App extends Component {
   }
 
   handleAlgoChange({ target: { value: selectedAlgoName }}: string) {
-    const currentDistance = this.state.distances.find((d) => {
-      return d.distance === this.state.calculatedDistance;
-    });
-    const pace = currentDistance ? currentDistance.pace : this.state.distances[0].pace;
     const distances = calculateDistances(
-      pace,
+      this.currentDistance.pace,
       this.state.calculatedDistance,
       selectedAlgoName,
       this.state.distanceMap
@@ -60,10 +55,10 @@ class App extends Component {
       }
     }
     this.setState({
-      distanceMap,
       distances: this.state.distances.filter(d => {
         return d.distance !== distance;
       }),
+      distanceMap,
     });
   }
 
@@ -83,7 +78,7 @@ class App extends Component {
   }
 
   get algos() {
-    return this.state.algos.map(algo =>
+    return ['SAME', 'PROJECTED'].map(algo =>
       <Algo
         selectedAlgoName={this.state.selectedAlgoName}
         key={algo}
@@ -91,6 +86,13 @@ class App extends Component {
         handleChange={this.handleAlgoChange}
       />
     );
+  }
+
+  // The highlighted distance object
+  get currentDistance() {
+    return this.state.distances.find(d => {
+      return d.distance === this.state.calculatedDistance;
+    }) || this.state.distances[0];
   }
 
   get rows() {

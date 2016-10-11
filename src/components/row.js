@@ -60,6 +60,7 @@ export default class Row extends Component {
         <input
           type='text'
           value={this.state.pace}
+          autoFocus={this.props.highlighted}
           data-distance={this.props.distance}
           onChange={this.handleChange}
           onBlur={this.handleBlur}
