@@ -52,13 +52,13 @@ export default class Row extends Component {
     return (
       <label className={this.labelClassName}>
         <button onClick={this.handleRemove}
-                title="Remove">
-          <span className="material-icons">
+                title='Remove'>
+          <span className='material-icons'>
             remove_circle_outline
           </span>
         </button>
         <input
-          type="text"
+          type='text'
           value={this.state.pace}
           data-distance={this.props.distance}
           onChange={this.handleChange}

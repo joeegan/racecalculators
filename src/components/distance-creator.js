@@ -12,25 +12,25 @@ export default class DistanceCreator extends Component {
     this.handleRadioChange = this.handleRadioChange.bind(this);
   }
 
-  handleSubmit(ev) {
+  handleSubmit({ target }) {
     ev.preventDefault();
-    const distance = +ev.target[0].value;
+    const distance = +target[0].value;
     const metric = this.state.selectedMetric;
     this.props.handleAdd(distance, metric);
   }
 
-  handleRadioChange(ev) {
+  handleRadioChange({ target }) {
     this.setState({
-      selectedMetric: ev.target.value,
+      selectedMetric: target.value,
     })
   }
 
   get radios() {
-    return ['k', 'miles'].map((metric) => {
+    return ['k', 'miles'].map(metric => {
       return (
         <label key={metric}>
           <input
-            type="radio"
+            type='radio'
             checked={this.state.selectedMetric === metric}
             onChange={this.handleRadioChange}
             value={metric}
@@ -44,9 +44,9 @@ export default class DistanceCreator extends Component {
   render() {
     return (
       <form onSubmit={this.handleSubmit}>
-        <input type="text" autoFocus="true" />
+        <input type='text' autoFocus='true' />
         {this.radios}
-        <p className="distance-adder_hint">
+        <p className='distance-adder_hint'>
           Press Enter to submit new distance
         </p>
       </form>

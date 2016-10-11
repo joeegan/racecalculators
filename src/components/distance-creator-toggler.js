@@ -39,9 +39,9 @@ export default class DistanceCreatorToggler extends Component {
 
   render() {
     return (
-      <label className="row distance-adder">
+      <label className='row distance-adder'>
         <button onClick={this.handleFormToggle}>
-          <i className="material-icons">
+          <i className='material-icons'>
             {this.toggleIcon}
           </i>
         </button>
