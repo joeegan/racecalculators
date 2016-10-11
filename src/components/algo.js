@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import i18n from '../i18n/en';
 
-const Algo = (props) => (
+const Algo = props => (
   <div>
     <label>
       {i18n[props.name]}

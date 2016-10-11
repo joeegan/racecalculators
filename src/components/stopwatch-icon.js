@@ -6,7 +6,7 @@ function animationClass(toggled) {
   return className += toggled ? '0' : '1';
 }
 
-const StopwatchIcon = (props) => (
+const StopwatchIcon = props => (
   <div className='stopwatch'>
     <div className='stopwatch_top'></div>
     <div className='stopwatch_right'></div>

@@ -19,6 +19,13 @@ function calculateDistances(pace: string, distance: number, algoName: string, di
       distance: distance,
       pace: map.get(algoName).call(null, distance),
     }
+  }).sort((a, b) => {
+    if (a.distance > b. distance) {
+      return 1;
+    } else if (a.distance < b.distance) {
+      return -1;
+    }
+    return 0;
   });
 }
 

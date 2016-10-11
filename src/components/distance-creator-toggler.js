@@ -24,6 +24,7 @@ export default class DistanceCreatorToggler extends Component {
       return (
         <DistanceCreator
           handleAdd={this.props.handleAdd}
+          distanceMap={this.props.distanceMap}
         />
       )
     }

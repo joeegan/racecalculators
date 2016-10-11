@@ -16,7 +16,8 @@ class App extends Component {
       selectedAlgoName: props.selectedAlgoName,
       calculatedDistance: props.calculatedDistance,
       animateToggle: false,
-      algos: ['SAME', 'PROJECTED']
+      algos: ['SAME', 'PROJECTED'],
+      error: null,
     };
     this.handlePaceChange = this.handlePaceChange.bind(this);
     this.handleSwitchChange = this.handleSwitchChange.bind(this);
@@ -56,8 +57,7 @@ class App extends Component {
     });
   }
 
-  handleAdd(distance: number, metric: string) {
-    const key = `${distance}${metric}`;
+  handleAdd(distance: number, metric: string, key: string) {
     const distanceMap = Object.assign({
       [key]: metric === 'k' ? distance : milesToK(distance),
     }, this.distanceMap);
@@ -113,8 +113,11 @@ class App extends Component {
         <StopwatchIcon toggled={this.state.animateToggle} />
         <div className="switcher">{this.algos}</div>
         <form>{this.rows}</form>
-        <DistanceCreatorToggler handleShowCreator={this.handleShowCreator}
-          handleAdd={this.handleAdd} />
+        <DistanceCreatorToggler
+          distanceMap={this.distanceMap}
+          handleAdd={this.handleAdd}
+          handleShowCreator={this.handleShowCreator}
+        />
         <a href={i18n['source_code_url']}>
           {i18n['source_code']}
         </a>
