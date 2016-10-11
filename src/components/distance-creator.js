@@ -6,7 +6,7 @@ export default class DistanceCreator extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      typed: null,
+      typed: '',
       selectedMetric: 'k',
       error: null,
     };
@@ -24,7 +24,7 @@ export default class DistanceCreator extends Component {
       return;
     }
     this.setState({
-      typed: null,
+      typed: '',
     })
     this.props.handleAdd(distance, metric, key);
   }
@@ -35,13 +35,12 @@ export default class DistanceCreator extends Component {
     });
   }
 
-  handleDistanceType({ target: { value } }) {
-    const typed = +value;
-    const key = `${typed}${this.state.selectedMetric}`;
-    let error = null;
+  handleDistanceType({ target: { value: typed } }) {
+    const key = `${+typed}${this.state.selectedMetric}`;
+    let error = '';
     if (this.props.distanceMap.hasOwnProperty(key)) {
       error = 'This distance already exists';
-    } else if (typed.toString() === "NaN") {
+    } else if ((+typed).toString() === "NaN") {
       error = 'Enter a valid number';
     }
     this.setState({
@@ -76,8 +75,8 @@ export default class DistanceCreator extends Component {
     return (
       <form onSubmit={this.handleSubmit} className={this.className}>
         <input
-          type='text'
           autoFocus='true'
+          value={this.state.typed}
           onChange={this.handleDistanceType}
         />
         {this.radios}
@@ -91,6 +90,7 @@ export default class DistanceCreator extends Component {
 }
 
 DistanceCreator.propTypes = {
+  typed: PropTypes.string,
   handleAdd: PropTypes.func,
   distanceMap: PropTypes.object,
 };

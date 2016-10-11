@@ -6,6 +6,7 @@ import StopwatchIcon from './components/stopwatch-icon';
 import { calculateDistances, milesToK } from './util/distance';
 import kilometreDistances from './util/kilometre-distances';
 import i18n from './i18n/en';
+import _ from 'lodash';
 
 class App extends Component {
 
@@ -15,42 +16,51 @@ class App extends Component {
       distances: props.distances,
       selectedAlgoName: props.selectedAlgoName,
       calculatedDistance: props.calculatedDistance,
+      distanceMap: props.distanceMap,
       animateToggle: false,
       algos: ['SAME', 'PROJECTED'],
       error: null,
     };
     this.handlePaceChange = this.handlePaceChange.bind(this);
-    this.handleSwitchChange = this.handleSwitchChange.bind(this);
+    this.handleAlgoChange = this.handleAlgoChange.bind(this);
     this.handleRemove = this.handleRemove.bind(this);
     this.handleAdd = this.handleAdd.bind(this);
   }
 
   handlePaceChange(pace: string, distance: number) {
     this.setState({
-      distances: calculateDistances(pace, distance, this.state.selectedAlgoName, this.distancesMap),
+      distances: calculateDistances(pace, distance, this.state.selectedAlgoName, this.state.distanceMap),
       calculatedDistance: distance,
       animateToggle: !this.state.animateToggle,
     });
   }
 
-  handleSwitchChange(ev: object) {
-    const selectedAlgoName = ev.target.value;
-    const distances = this.state.distances.reduce((acc, d) => {
-      acc[d.name] = d.distance;
-      return acc;
-    }, {});
+  handleAlgoChange({ target: { value: selectedAlgoName }}: string) {
     const currentDistance = this.state.distances.find((d) => {
       return d.distance === this.state.calculatedDistance;
     });
     const pace = currentDistance ? currentDistance.pace : this.state.distances[0].pace;
+    const distances = calculateDistances(
+      pace,
+      this.state.calculatedDistance,
+      selectedAlgoName,
+      this.state.distanceMap
+    );
     this.setState({
-      distances: calculateDistances(pace, this.state.calculatedDistance, selectedAlgoName, distances),
+      distances,
       selectedAlgoName,
     });
   }
 
   handleRemove(distance: number) {
+    const distanceMap = this.state.distanceMap;
+    for (let d in distanceMap) {
+      if (distanceMap[d] == distance) {
+        delete distanceMap[d];
+      }
+    }
     this.setState({
+      distanceMap,
       distances: this.state.distances.filter(d => {
         return d.distance !== distance;
       }),
@@ -62,9 +72,10 @@ class App extends Component {
       [key]: metric === 'k' ? distance : milesToK(distance),
     }, this.distanceMap);
     this.setState({
+      distanceMap,
       distances: calculateDistances(
-        '00:06:00',
-        5,
+        this.state.distances.find(d => d.distance === this.state.calculatedDistance).pace,
+        this.state.calculatedDistance,
         this.state.selectedAlgoName,
         distanceMap
       ),
@@ -77,7 +88,7 @@ class App extends Component {
         selectedAlgoName={this.state.selectedAlgoName}
         key={algo}
         name={algo}
-        handleChange={this.handleSwitchChange}
+        handleChange={this.handleAlgoChange}
       />
     );
   }
@@ -114,7 +125,7 @@ class App extends Component {
         <div className="switcher">{this.algos}</div>
         <form>{this.rows}</form>
         <DistanceCreatorToggler
-          distanceMap={this.distanceMap}
+          distanceMap={this.state.distanceMap}
           handleAdd={this.handleAdd}
           handleShowCreator={this.handleShowCreator}
         />
@@ -131,10 +142,12 @@ App.propTypes = {
   distances: PropTypes.array,
   selectedAlgoName: PropTypes.string,
   calculatedDistance: PropTypes.number,
+  distanceMap: PropTypes.object,
 };
 
 App.defaultProps = {
   calculatedDistance: kilometreDistances['1miles'],
+  distanceMap: kilometreDistances,
   distances: calculateDistances('00:06:38', kilometreDistances['1miles'], 'SAME'),
   selectedAlgoName: 'SAME',
 };

@@ -53,5 +53,6 @@ export default class DistanceCreatorToggler extends Component {
 }
 
 DistanceCreatorToggler.propTypes = {
+  distanceMap: PropTypes.object,
   handleAdd: PropTypes.func,
 };
