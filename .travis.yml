@@ -3,9 +3,3 @@ node_js:
   - '6'
 install:
   - 'npm install'
-script:
-  - 'npm run clean:dist'
-  - 'npm run build'
-deploy:
-  on:
-    branch: release
