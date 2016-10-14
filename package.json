@@ -14,8 +14,8 @@
     "lint": "./node_modules/.bin/eslint src --ignore-path .gitignore"
   },
   "repository": {
-    "type": "git",
-    "url": "https://github.com/joeegan/pace.git"
+    "url": "https://github.com/joeegan/pace.git",
+    "type": "git"
   },
   "author": "Joe Egan",
   "license": "MIT",
