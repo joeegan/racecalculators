@@ -11,7 +11,7 @@ import favicon from './favicon.ico';
 import sw from './service-worker';
 
 const register = require('serviceworker!./service-worker.js');
-register({ scope: '/pace-app/' })
+register && register({ scope: '/pace-app/' })
   .then(() => console.log('Service worker caching resources'))
   .catch(err => console.log('Service worker failed to load', err));
 
