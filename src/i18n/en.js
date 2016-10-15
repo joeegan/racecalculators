@@ -1,5 +1,6 @@
 module.exports = {
-  halfMarathon: 'Half',
+  '1miles': '1 mile',
+  halfMarathon: 'Half marathon',
   marathon: 'Marathon',
   pace: 'Pace',
   PROJECTED: 'Race time prediction',
