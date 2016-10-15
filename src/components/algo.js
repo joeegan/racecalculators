@@ -15,7 +15,8 @@ const Algo = props => (
     <p className='explanation'>
       <span>
         {i18n[`${props.name}_explanation`]}
-        <a href={i18n[`${props.name}_url`]}>
+        <a target='_blank'
+           href={i18n[`${props.name}_url`]}>
           {i18n[`${props.name}_link`]}
         </a>
       </span>

@@ -131,9 +131,6 @@ class App extends Component {
           handleAdd={this.handleAdd}
           handleShowCreator={this.handleShowCreator}
         />
-        <a href={i18n['source_code_url']}>
-          {i18n['source_code']}
-        </a>
       </div>
     );
   }
