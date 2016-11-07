@@ -1,0 +1,61 @@
+exports[`test DistanceCreator changes the text after click 1`] = `
+<form
+  className={undefined}
+  onSubmit={[Function bound handleSubmit]}>
+  <input
+    autoFocus="true"
+    onChange={[Function bound handleDistanceType]}
+    value="" />
+  <label>
+    <input
+      checked={true}
+      onChange={[Function bound handleRadioChange]}
+      type="radio"
+      value="k" />
+    k
+  </label>
+  <label>
+    <input
+      checked={false}
+      onChange={[Function bound handleRadioChange]}
+      type="radio"
+      value="miles" />
+    miles
+  </label>
+  <p
+    className="distance-adder_hint">
+    Press Enter to submit new distance
+  </p>
+</form>
+`;
+
+exports[`test DistanceCreator changes the text after click 2`] = `
+<form
+  className={undefined}
+  onSubmit={[Function bound handleSubmit]}>
+  <input
+    autoFocus="true"
+    onChange={[Function bound handleDistanceType]}
+    value="" />
+  <label>
+    <input
+      checked={true}
+      onChange={[Function bound handleRadioChange]}
+      type="radio"
+      value="k" />
+    k
+  </label>
+  <label>
+    <input
+      checked={false}
+      onChange={[Function bound handleRadioChange]}
+      type="radio"
+      value="miles" />
+    miles
+  </label>
+  <p
+    className="distance-adder_hint">
+    Press Enter to submit new distance
+  </p>
+</form>
+`;
